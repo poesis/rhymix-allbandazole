@@ -4,7 +4,13 @@
 	</grants>
 	<actions>
 		<action name="dispAllbandazoleAdminConfig" class="Controllers\Admin" menu-name="allbandazole" admin-index="true" />
-		<action name="procAllbandazoleAdminInsertConfig" class="Controllers\Admin" />
+		<action name="dispAllbandazoleAdminCountries" class="Controllers\Admin" menu-name="allbandazole" />
+		<action name="dispAllbandazoleAdminClouds" class="Controllers\Admin" menu-name="allbandazole" />
+		<action name="dispAllbandazoleAdminCaptcha" class="Controllers\Admin" menu-name="allbandazole" />
+		<action name="procAllbandazoleAdminSaveConfig" class="Controllers\Admin" />
+		<action name="procAllbandazoleAdminSaveCountries" class="Controllers\Admin" />
+		<action name="procAllbandazoleAdminSaveClouds" class="Controllers\Admin" />
+		<action name="procAllbandazoleAdminSaveCaptcha" class="Controllers\Admin" />
 	</actions>
 	<eventHandlers>
 		<eventHandler before="moduleHandler.init" class="Controllers\EventHandlers" method="beforeModuleInit" />

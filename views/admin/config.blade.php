@@ -1,18 +1,8 @@
-@load('config.scss')
-
-<div class="x_page-header">
-	<h1>{{ $lang->cmd_allbandazole }}</h1>
-</div>
-
-<ul class="x_nav x_nav-tabs">
-	<li @class(['x_active' => $act == 'dispAllbandazoleAdminConfig'])">
-		<a href="@url(['module' => 'admin', 'act' => 'dispAllbandazoleAdminConfig'])">{$lang->cmd_allbandazole_general_config}</a>
-	</li>
-</ul>
+@include('header.blade.php')
 
 <form class="x_form-horizontal" action="./" method="post" id="allbandazole">
 	<input type="hidden" name="module" value="allbandazole" />
-	<input type="hidden" name="act" value="procAllbandazoleAdminInsertConfig" />
+	<input type="hidden" name="act" value="procAllbandazoleAdminSaveConfig" />
 	<input type="hidden" name="success_return_url" value="{{ getRequestUriByServerEnviroment() }}" />
 	<input type="hidden" name="error_return_url" value="{{ getRequestUriByServerEnviroment() }}" />
 	<input type="hidden" name="xe_validator_id" value="modules/allbandazole/tpl/config/1" />
@@ -51,6 +41,32 @@
 			<div class="x_controls">
 				<textarea name="ip_blocks" id="ip_blocks" class="x_full-width">{{ implode("\n", $config->ip_blocks) . "\n" }}</textarea>
 				<p class="x_help-block">{{ $lang->msg_allbandazole_multiline }}</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="x_control-group">
+			<label class="x_control-label" for="ip_whitelist">{{ $lang->cmd_allbandazole_ip_whitelist }}</label>
+			<div class="x_controls">
+				<textarea name="ip_whitelist" id="ip_whitelist" class="x_full-width">{{ implode("\n", $config->ip_whitelist) . "\n" }}</textarea>
+				<p class="x_help-block">{{ $lang->msg_allbandazole_multiline }}</p>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="x_control-group">
+			<label class="x_control-label">{{ $lang->cmd_allbandazole_bot_whitelist }}</label>
+			<div class="x_controls">
+				<label for="bot_whitelist_googlebot" class="x_inline">
+					<input type="checkbox" name="bot_whitelist[]" id="bot_whitelist_googlebot" value="googlebot" @checked(!empty($config->bot_whitelist['googlebot'])) />
+					Googlebot
+				</label>
+				<label for="bot_whitelist_bingbot" class="x_inline">
+					<input type="checkbox" name="bot_whitelist[]" id="bot_whitelist_bingbot" value="bingbot" @checked(!empty($config->bot_whitelist['bingbot'])) />
+					Bingbot
+				</label>
 			</div>
 		</div>
 	</section>

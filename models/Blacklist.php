@@ -80,4 +80,32 @@ class Blacklist
 	public const IP_BLOCKS = [
 		'222.239.104.0/24',
 	];
+
+	/**
+	 * Public Clouds
+	 */
+	public const PUBLIC_CLOUDS = [
+		'us' => [
+			'aws' => 'AWS',
+			'azure' => 'Azure',
+			'digitalocean' => 'DigitalOcean',
+			'gcp' => 'Google Cloud (GCP)',
+			'linode' => 'Linode (Akamai)',
+			'oracle' => 'Oracle Cloud',
+			'vultr' => 'Vultr',
+		],
+		'eu' => [
+			'hetzner' => 'Hetzner',
+			'ovh' => 'OVH',
+			'scaleway' => 'Scaleway',
+		],
+		'cn' => [
+			'alibaba' => 'Alibaba Cloud',
+			'huawei' => 'Huawei Cloud',
+			'tencent' => 'Tencent Cloud',
+		],
+		'kr' => [
+			'smileserv' => 'Smileserv (cloudv, iwinv)',
+		]
+	];
 }

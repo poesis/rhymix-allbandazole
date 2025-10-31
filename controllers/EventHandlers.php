@@ -19,20 +19,26 @@ class EventHandlers extends Base
 	 */
 	public function beforeModuleInit($obj)
 	{
+		// 모듈 사용 설정이 꺼져 있다면 리턴
 		$config = ConfigModel::getConfig();
 		if (empty($config->enabled))
 		{
 			return;
 		}
 
+		// 항상 허용할 IP 대역에 속해 있다면 리턴
+		if ($config->ip_whitelist && IpFilter::inRanges(\RX_CLIENT_IP, $config->ip_whitelist))
+		{
+			return;
+		}
+
+		// User-Agent 또는 IP 대역이 차단 대상인지 확인
 		$user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
 		if ($user_agent && $config->user_agents_regexp && preg_match($config->user_agents_regexp, $user_agent))
 		{
 			return $this->_block();
 		}
-
-		$ip = \RX_CLIENT_IP;
-		if ($config->ip_blocks && IpFilter::inRanges($ip, $config->ip_blocks))
+		if ($config->ip_blocks && IpFilter::inRanges(\RX_CLIENT_IP, $config->ip_blocks))
 		{
 			return $this->_block();
 		}
