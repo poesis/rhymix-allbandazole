@@ -51,11 +51,35 @@ class EventHandlers extends Base
 
 		// 항상 허용할 로봇이라면 리턴
 		$user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
-		if (isset($config->bot_whitelist['googlebot']) && preg_match('/Googlebot|Mediapartners-Google/', $user_agent))
+		if (isset($config->bot_whitelist['googlebot']) && preg_match('/Googlebot[-\/]|Mediapartners-Google/', $user_agent))
 		{
 			return;
 		}
-		if (isset($config->bot_whitelist['bingbot']) && preg_match('/bingbot/', $user_agent))
+		if (isset($config->bot_whitelist['bingbot']) && preg_match('/bingbot\//', $user_agent))
+		{
+			return;
+		}
+		if (isset($config->bot_whitelist['facebook']) && preg_match('/facebookexternalhit\//', $user_agent))
+		{
+			return;
+		}
+		if (isset($config->bot_whitelist['twitter']) && preg_match('/Twitterbot\//', $user_agent))
+		{
+			return;
+		}
+		if (isset($config->bot_whitelist['kakaotalk']) && preg_match('/kakaotalk-scrap\//', $user_agent))
+		{
+			return;
+		}
+		if (isset($config->bot_whitelist['baidu']) && preg_match('/Baiduspider\//', $user_agent))
+		{
+			return;
+		}
+		if (isset($config->bot_whitelist['yandex']) && preg_match('/YandexBot\//', $user_agent))
+		{
+			return;
+		}
+		if (isset($config->bot_whitelist['duckduckgo']) && preg_match('/DuckDuckBot\//', $user_agent))
 		{
 			return;
 		}

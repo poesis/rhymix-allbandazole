@@ -68,6 +68,30 @@
 					<input type="checkbox" name="bot_whitelist[]" id="bot_whitelist_bingbot" value="bingbot" @checked(!empty($config->bot_whitelist['bingbot'])) />
 					Bingbot
 				</label>
+				<label for="bot_whitelist_facebook" class="x_inline">
+					<input type="checkbox" name="bot_whitelist[]" id="bot_whitelist_facebook" value="facebook" @checked(!empty($config->bot_whitelist['facebook'])) />
+					Facebook
+				</label>
+				<label for="bot_whitelist_twitter" class="x_inline">
+					<input type="checkbox" name="bot_whitelist[]" id="bot_whitelist_twitter" value="twitter" @checked(!empty($config->bot_whitelist['twitter'])) />
+					Twitter
+				</label>
+				<label for="bot_whitelist_kakaotalk" class="x_inline">
+					<input type="checkbox" name="bot_whitelist[]" id="bot_whitelist_kakaotalk" value="kakaotalk" @checked(!empty($config->bot_whitelist['kakaotalk'])) />
+					Kakaotalk
+				</label>
+				<label for="bot_whitelist_baidu" class="x_inline">
+					<input type="checkbox" name="bot_whitelist[]" id="bot_whitelist_baidu" value="baidu" @checked(!empty($config->bot_whitelist['baidu'])) />
+					Baidu
+				</label>
+				<label for="bot_whitelist_yandex" class="x_inline">
+					<input type="checkbox" name="bot_whitelist[]" id="bot_whitelist_yandex" value="yandex" @checked(!empty($config->bot_whitelist['yandex'])) />
+					Yandex
+				</label>
+				<label for="bot_whitelist_duckduckgo" class="x_inline">
+					<input type="checkbox" name="bot_whitelist[]" id="bot_whitelist_duckduckgo" value="duckduckgo" @checked(!empty($config->bot_whitelist['duckduckgo'])) />
+					DuckDuckGo
+				</label>
 				<p class="x_help-block">{{ $lang->msg_allbandazole_bot_whitelist }}</p>
 			</div>
 		</div>

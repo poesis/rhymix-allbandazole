@@ -52,7 +52,12 @@ class Config
 			}
 			if (!isset($config->bot_whitelist))
 			{
-				$config->bot_whitelist = [];
+				$config->bot_whitelist = [
+					'googlebot' => true,
+					'bingbot' => true,
+					'facebook' => true,
+					'kakaotalk' => true,
+				];
 			}
 			if (!isset($config->block_countries))
 			{

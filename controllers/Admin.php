@@ -121,11 +121,12 @@ class Admin extends Base
 			return $str !== '';
 		});
 		$config->bot_whitelist = [];
-		if (is_array($vars->bot_whitelist ?? null) && in_array('googlebot', $vars->bot_whitelist)) {
-			$config->bot_whitelist['googlebot'] = true;
-		}
-		if (is_array($vars->bot_whitelist ?? null) && in_array('bingbot', $vars->bot_whitelist)) {
-			$config->bot_whitelist['bingbot'] = true;
+		foreach (['googlebot', 'bingbot', 'facebook', 'twitter', 'kakaotalk', 'baidu', 'yandex', 'duckduckgo'] as $bot)
+		{
+			if (is_array($vars->bot_whitelist ?? null) && in_array($bot, $vars->bot_whitelist))
+			{
+				$config->bot_whitelist[$bot] = true;
+			}
 		}
 		$config->captcha_pass_time = max(1, (int)$vars->captcha_pass_time);
 
