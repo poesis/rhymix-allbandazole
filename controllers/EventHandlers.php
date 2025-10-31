@@ -22,7 +22,7 @@ class EventHandlers extends Base
 	/**
 	 * 로그인 전에 접근할 수 있는 화면 목록
 	 */
-	public const PRE_LOGIN_ACTS = '/^dispMember(Login|SignUp|Insert|FindAccount|AuthAccount)|procAllbandazoleSubmitCaptcha$/';
+	public const PRE_LOGIN_ACTS = '/^dispMember(Login|SignUp|Insert|FindAccount|AuthAccount)/';
 
 	/**
 	 * moduleHandler.init 시점에 실행
