@@ -159,14 +159,21 @@ class EventHandlers extends Base
 	 */
 	protected function _blockCaptcha()
 	{
-		// 캡챠 생성
+		// 스팸필터 모듈의 캡챠 기능을 이용
 		$config = ModuleModel::getModuleConfig('spamfilter') ?? new \stdClass();
-		$captcha_class = 'Rhymix\\Modules\\Spamfilter\\Captcha\\' . $config->captcha->type;
-		$captcha_class::init($config->captcha);
-		$captcha = new $captcha_class();
-		$captcha->addScripts();
-		Context::set('captcha', $captcha);
-		Context::set('config', $config);
+		if (isset($config->captcha->type) && $config->captcha->type !== 'none')
+		{
+			$captcha_class = 'Rhymix\\Modules\\Spamfilter\\Captcha\\' . $config->captcha->type;
+			$captcha_class::init($config->captcha);
+			$captcha = new $captcha_class();
+			$captcha->addScripts();
+			Context::set('captcha', $captcha);
+			Context::set('config', $config);
+		}
+		else
+		{
+			Context::set('captcha', '<br><strong>ERROR: CAPTCHA NOT CONFIGURED</strong><br><br>');
+		}
 
 		// 애셋 준비
 		$css_file = 'modules/allbandazole/views/styles.css';
