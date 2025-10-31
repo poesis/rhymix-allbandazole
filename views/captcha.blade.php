@@ -6,10 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{{ Context::replaceUserLang($site_module_info->settings->title) }}</title>
 	<link rel="stylesheet" href="{{ $static_css_path }}" />
-	<script src="{{ \RX_BASEURL }}common/js/jquery-2.2.4.min.js"></script>
-	<script src="{{ \RX_BASEURL }}common/js/plugins/cookie/js.cookie.min.js"></script>
-	<script src="{{ \RX_BASEURL }}common/js/common.js"></script>
-	<script src="{{ \RX_BASEURL }}modules/spamfilter/tpl/js/{{ $config->captcha->type }}.js"></script>
+	@foreach (Context::getJsFile('head', true) as $js_file)
+	<script src="{!! $js_file['file'] !!}"{!! $js_file['attrs'] !!}></script>
+	@endforeach
 </head>
 <body>
 
@@ -39,6 +38,10 @@
 </div>
 
 {!! Context::getHtmlFooter() !!}
+
+@foreach (Context::getJsFile('body', true) as $js_file)
+<script src="{!! $js_file['file'] !!}"></script>
+@endforeach
 
 </body>
 </html>

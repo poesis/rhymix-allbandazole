@@ -8,6 +8,7 @@ use Rhymix\Framework\Template;
 use Rhymix\Modules\Allbandazole\Models\Config as ConfigModel;
 use Rhymix\Modules\Allbandazole\Models\IpFilter as IpFilterModel;
 use Context;
+use HTMLDisplayHandler;
 use ModuleModel;
 
 /**
@@ -145,6 +146,7 @@ class EventHandlers extends Base
 	 */
 	protected function _blockSimple()
 	{
+		// 웹서버 403 에러 화면과 동일한 내용을 출력
 		$type = ($_SERVER['SERVER_SOFTWARE'] ?? '') === 'nginx' ? 'nginx' : 'apache';
 		$template = $this->module_path . 'views/blocked/' . $type . '.html';
 		readfile($template);
@@ -166,8 +168,13 @@ class EventHandlers extends Base
 		Context::set('captcha', $captcha);
 		Context::set('config', $config);
 
+		// 애셋 준비
 		$css_file = 'modules/allbandazole/views/styles.css';
 		Context::set('static_css_path', \RX_BASEURL . $css_file . '?v=' . filemtime(\RX_BASEDIR . $css_file));
+		$oHTMLDisplayHandler = new HTMLDisplayHandler;
+		$oHTMLDisplayHandler->_loadDesktopJSCSS();
+
+		// 템플릿 컴파일
 		$tpl = new Template($this->module_path . 'views', 'captcha.blade.php');
 		echo $tpl->compile();
 	}
@@ -179,8 +186,11 @@ class EventHandlers extends Base
 	 */
 	protected function _blockLogin()
 	{
+		// 애셋 준비
 		$css_file = 'modules/allbandazole/views/styles.css';
 		Context::set('static_css_path', \RX_BASEURL . $css_file . '?v=' . filemtime(\RX_BASEDIR . $css_file));
+
+		// 템플릿 컴파일
 		$tpl = new Template($this->module_path . 'views', 'login.blade.php');
 		echo $tpl->compile();
 	}
