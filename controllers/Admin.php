@@ -11,7 +11,6 @@ use Rhymix\Framework\Filters\IpFilter as RhymixIpFilter;
 use Rhymix\Modules\Allbandazole\Models\Blacklist as BlacklistModel;
 use Rhymix\Modules\Allbandazole\Models\Config as ConfigModel;
 use Rhymix\Modules\Allbandazole\Models\IpFilter as IpFilterModel;
-use BaseObject;
 use Context;
 use ModuleModel;
 
@@ -166,7 +165,7 @@ class Admin extends Base
 		// 국가별 IP 대역 DB가 존재하는지 확인
 		if (!$config->block_countries['updated'])
 		{
-			return new BaseObject(-1, 'cmd_allbandazole_countries_update_first');
+			throw new Exception('cmd_allbandazole_countries_update_first');
 		}
 
 		// 제출받은 데이터 불러오기
@@ -229,7 +228,7 @@ class Admin extends Base
 		// 클라우드 IP 대역 DB가 존재하는지 확인
 		if (!$config->block_clouds['updated'])
 		{
-			return new BaseObject(-1, 'cmd_allbandazole_clouds_update_first');
+			throw new Exception('cmd_allbandazole_clouds_update_first');
 		}
 
 		// 제출받은 데이터 불러오기
@@ -285,7 +284,7 @@ class Admin extends Base
 		$oDB = DB::getInstance();
 		if (!$oDB->isTableExists('allbandazole_countries'))
 		{
-			return new BaseObject(-1, 'cmd_allbandazole_create_table');
+			throw new Exception('cmd_allbandazole_create_table');
 		}
 
 		// 다운로드
@@ -294,11 +293,11 @@ class Admin extends Base
 		$request = HTTP::download($url, $temp_path);
 		if ($request->getStatusCode() !== 200)
 		{
-			return new BaseObject(-1, 'cmd_allbandazole_update_failed');
+			throw new Exception('cmd_allbandazole_update_failed');
 		}
 		if (!file_exists($temp_path) || !filesize($temp_path))
 		{
-			return new BaseObject(-1, 'cmd_allbandazole_update_failed');
+			throw new Exception('cmd_allbandazole_update_failed');
 		}
 
 		// 디버그 모드 비활성화
@@ -315,7 +314,7 @@ class Admin extends Base
 		$fp = gzopen($temp_path, 'r');
 		if (!$fp)
 		{
-			return new BaseObject(-1, 'cmd_allbandazole_update_failed');
+			throw new Exception('cmd_allbandazole_update_failed');
 		}
 		$stmt = $oDB->prepare('INSERT INTO allbandazole_countries (`start_ip`, `end_ip`, `country`) VALUES (?, ?, ?)');
 		$oDB->beginTransaction();
@@ -353,7 +352,7 @@ class Admin extends Base
 		$oDB = DB::getInstance();
 		if (!$oDB->isTableExists('allbandazole_clouds'))
 		{
-			return new BaseObject(-1, 'cmd_allbandazole_create_table');
+			throw new Exception('cmd_allbandazole_create_table');
 		}
 
 		// 다운로드
@@ -362,11 +361,11 @@ class Admin extends Base
 		$request = HTTP::download($url, $temp_path);
 		if ($request->getStatusCode() !== 200)
 		{
-			return new BaseObject(-1, 'cmd_allbandazole_update_failed');
+			throw new Exception('cmd_allbandazole_update_failed');
 		}
 		if (!file_exists($temp_path) || !filesize($temp_path))
 		{
-			return new BaseObject(-1, 'cmd_allbandazole_update_failed');
+			throw new Exception('cmd_allbandazole_update_failed');
 		}
 
 		// 디버그 모드 비활성화
@@ -383,7 +382,7 @@ class Admin extends Base
 		$fp = gzopen($temp_path, 'r');
 		if (!$fp)
 		{
-			return new BaseObject(-1, 'cmd_allbandazole_update_failed');
+			throw new Exception('cmd_allbandazole_update_failed');
 		}
 		$stmt = $oDB->prepare('INSERT INTO allbandazole_clouds (`start_ip`, `end_ip`, `cloud`, `region`) VALUES (?, ?, ?, ?)');
 		$oDB->beginTransaction();
