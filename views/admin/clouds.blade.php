@@ -21,7 +21,7 @@
 		<div class="x_control-group">
 			<label class="x_control-label">{{ $lang->cmd_allbandazole_block_clouds }}</label>
 			<div class="x_controls">
-				<label class="x_inline">
+				<label class="x_inline cloud-group-label">
 					[{{ $lang->cmd_allbandazole_us_clouds }}]
 				</label>
 				@foreach ($clouds['us'] as $key => $val)
@@ -31,7 +31,7 @@
 					</label>
 				@endforeach
 				<br />
-				<label class="x_inline">
+				<label class="x_inline cloud-group-label">
 					[{{ $lang->cmd_allbandazole_eu_clouds }}]
 				</label>
 				@foreach ($clouds['eu'] as $key => $val)
@@ -41,7 +41,7 @@
 					</label>
 				@endforeach
 				<br />
-				<label class="x_inline">
+				<label class="x_inline cloud-group-label">
 					[{{ $lang->cmd_allbandazole_cn_clouds }}]
 				</label>
 				@foreach ($clouds['cn'] as $key => $val)
@@ -51,7 +51,7 @@
 					</label>
 				@endforeach
 				<br />
-				<label class="x_inline">
+				<label class="x_inline cloud-group-label">
 					[{{ $lang->cmd_allbandazole_kr_clouds }}]
 				</label>
 				@foreach ($clouds['kr'] as $key => $val)
@@ -60,6 +60,10 @@
 						{{ $val }}
 					</label>
 				@endforeach
+				<br />
+				<p class="x_help-block after-checkboxes">
+					{{ $lang->msg_allbandazole_country_blocking_first }}
+				</p>
 			</div>
 		</div>
 		<div class="x_control-group">

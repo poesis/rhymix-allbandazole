@@ -38,8 +38,8 @@ $lang->cmd_allbandazole_clouds_update_first = 'Please update the cloud IP ranges
 $lang->cmd_allbandazole_captcha_type = 'Captcha Type';
 $lang->cmd_allbandazole_captcha_pass_time = 'CAPTCHA Validity';
 $lang->cmd_allbandazole_authenticate = 'Authenticate';
-$lang->msg_allbandazole_countries_help = 'If there are many AI bots from overseas, you can block them by country, or block all overseas access.<br />Please ensure that normal visitors can bypass the block through CAPTCHA or login, so as not to cause excessive inconvenience.<br />Country blocking relies on a database of IP ranges, so it must be updated regularly.';
-$lang->msg_allbandazole_clouds_help = 'These settings can help block bots that obtain and rotate through multiple server IPs through cloud services.<br />If your site does not provide an API for developers, it is safe to assume that most requests from cloud server IPs is from bots.<br />Cloud blocking relies on a database of IP ranges, so it must be updated regularly.';
+$lang->msg_allbandazole_countries_help = 'If there are many AI bots from overseas, you can block them by country, or block all overseas access.<br />Please ensure that normal visitors can bypass the block through CAPTCHA or login, so as not to cause excessive inconvenience.</p><p>Country blocking relies on a database of IP ranges, which must be updated regularly.<br />This database may not be completely accurate, as it is based on freely available information.';
+$lang->msg_allbandazole_clouds_help = 'These settings can help block bots that obtain and rotate through multiple server IPs through cloud services.<br />If your site does not provide an API for developers, it is safe to assume that most requests from cloud server IPs is from bots.</p><p>Cloud blocking relies on a database of IP ranges, which must be updated regularly.<br />This database may not be completely accurate, as it is based on freely available information.';
 $lang->msg_allbandazole_captcha_help = 'The settings below follow the CAPTCHA settings of the <a href="%s" target="_blank">Spam Filter Module</a>.<br />If you do not want to use CAPTCHA in general, you only need to fill the Use CAPTCHA / Site Key / Secret Key settings in the Spam Filter Module, without selecting any targets.';
 $lang->msg_allbandazole_captcha_not_use = 'There are settings to use CAPTCHA in the deworming module, but it is set not to use CAPTCHA in the spam filter module. Please check the settings.';
 $lang->msg_allbandazole_captcha_not_enabled = 'To require CAPTCHA, please enable CAPTCHA in the Spam Filter Module.';
@@ -49,5 +49,6 @@ $lang->msg_allbandazole_bot_whitelist = 'Check these boxes if you want non-Korea
 $lang->msg_allbandazole_captcha_pass_time = 'Set CAPTCHA Validity in minutes. The default is 4 hours (240 minutes).';
 $lang->msg_allbandazole_your_user_agent = 'This setting may also block the current user. Please check the User-Agent again.';
 $lang->msg_allbandazole_your_ip_block = 'This setting may also block the current user. Please check the IP ranges again.';
+$lang->msg_allbandazole_country_blocking_first = 'Country blocking takes precedence over cloud blocking. Clouds may be blocked if you block the country where their headquarters are located.';
 $lang->msg_allbandazole_required_login = "To confirm that you are not a robot,\nplease complete the login process below.";
 $lang->msg_allbandazole_required_captcha = "To confirm that you are not a robot,\nplease complete the CAPTCHA below.";
