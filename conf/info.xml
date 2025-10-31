@@ -2,10 +2,10 @@
 <module version="0.2">
 	<title xml:lang="ko">구충제 모듈</title>
 	<description xml:lang="ko">서버 자원과 트래픽을 빨아먹는 기생충 로봇을 차단합니다.</description>
-	<version>1.0.0</version>
-	<date>2024-10-26</date>
+	<version>2.0.0</version>
+	<date>2025-10-31</date>
 	<category>service</category>
-	<author email_address="kijin@poesis.org" link="https://www.poesis.org">
+	<author email_address="kijin@poesis.dev" link="https://www.poesis.dev">
 		<name xml:lang="ko">POESIS</name>
 	</author>
 </module>
