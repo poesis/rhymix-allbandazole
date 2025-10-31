@@ -1,5 +1,6 @@
 (function($) {
 	$(function() {
+
 		$('input[name="block_type"]').on('change', function() {
 			if ($(this).val() === 'selected' && $(this).is(':checked')) {
 				$('.visible-when-selected').show();
@@ -8,5 +9,28 @@
 			}
 		});
 		$('input[name="block_type"]:checked').trigger('change');
+
+		$('#btn_import_countries').on('click', function() {
+			const that = $(this);
+			const previous_text = that.text();
+			that.text(that.data('updating')).prop('disabled', true);
+			exec_json('allbandazole.procAllbandazoleAdminImportCountries', {}, function(data) {
+				alert(data.message);
+				that.text(previous_text).prop('disabled', false);
+				that.parent().find('span.timestamp').text(data.timestamp);
+			});
+		});
+
+		$('#btn_import_clouds').on('click', function() {
+			const that = $(this);
+			const previous_text = that.text();
+			that.text(that.data('updating')).prop('disabled', true);
+			exec_json('allbandazole.procAllbandazoleAdminImportClouds', {}, function(data) {
+				alert(data.message);
+				that.text(previous_text).prop('disabled', false);
+				that.parent().find('span.timestamp').text(data.timestamp);
+			});
+		});
+
 	});
 })(jQuery);

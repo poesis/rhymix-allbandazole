@@ -60,6 +60,7 @@ class Config
 					'type' => 'none',
 					'method' => 'simple',
 					'list' => [],
+					'updated' => 0,
 				];
 			}
 			if (!isset($config->block_clouds))
@@ -68,6 +69,7 @@ class Config
 					'type' => 'selected',
 					'method' => 'simple',
 					'list' => [],
+					'updated' => 0,
 				];
 			}
 

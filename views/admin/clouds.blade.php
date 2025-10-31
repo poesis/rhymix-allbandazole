@@ -75,6 +75,24 @@
 				</label>
 			</div>
 		</div>
+		<div class="x_control-group">
+			<label class="x_control-label">{{ $lang->cmd_allbandazole_update_clouds_db }}</label>
+			<div class="x_controls">
+				<button type="button" class="x_btn" id="btn_import_clouds" data-updating="{{ $lang->cmd_allbandazole_updating }}">
+					{{ $lang->cmd_allbandazole_update_now }}
+				</button>
+				<div class="x_help-block after-import-button">
+					{{ $lang->cmd_allbandazole_last_updated }}:
+					<span class="timestamp">
+						@if (empty($config->block_clouds['updated']))
+							{{ $lang->cmd_allbandazole_last_updated_never }}
+						@else
+							{{ date('Y-m-d H:i:s', $config->block_clouds['updated']) }}
+						@endif
+					</span>
+				</div>
+			</div>
+		</div>
 	</section>
 
 	<div class="btnArea x_clearfix">

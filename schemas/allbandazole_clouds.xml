@@ -1,0 +1,7 @@
+<table name="allbandazole_clouds">
+	<column name="id" type="bigint" notnull="notnull" primary_key="primary_key" auto_increment="auto_increment" />
+	<column name="start_ip" type="int unsigned" notnull="notnull" index="idx_start_ip" />
+	<column name="end_ip" type="int unsigned" notnull="notnull" index="idx_end_ip" />
+	<column name="cloud" type="varchar(40)" notnull="notnull" />
+	<column name="region" type="varchar(40)" notnull="notnull" />
+</table>

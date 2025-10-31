@@ -2,11 +2,15 @@
 
 namespace Rhymix\Modules\Allbandazole\Controllers;
 
+use Rhymix\Framework\DB;
+use Rhymix\Framework\Debug;
 use Rhymix\Framework\Exception;
+use Rhymix\Framework\HTTP;
 use Rhymix\Framework\i18n;
 use Rhymix\Framework\Filters\IpFilter;
 use Rhymix\Modules\Allbandazole\Models\Blacklist as BlacklistModel;
 use Rhymix\Modules\Allbandazole\Models\Config as ConfigModel;
+use BaseObject;
 use Context;
 use ModuleModel;
 
@@ -157,6 +161,12 @@ class Admin extends Base
 		// 현재 설정 상태 불러오기
 		$config = ConfigModel::getConfig();
 
+		// 국가별 IP 대역 DB가 존재하는지 확인
+		if (!$config->block_countries['updated'])
+		{
+			return new BaseObject(-1, 'cmd_allbandazole_countries_update_first');
+		}
+
 		// 제출받은 데이터 불러오기
 		$vars = Context::getRequestVars();
 		$config->block_countries['type'] = $vars->block_type;
@@ -195,6 +205,12 @@ class Admin extends Base
 		// 현재 설정 상태 불러오기
 		$config = ConfigModel::getConfig();
 
+		// 클라우드 IP 대역 DB가 존재하는지 확인
+		if (!$config->block_clouds['updated'])
+		{
+			return new BaseObject(-1, 'cmd_allbandazole_clouds_update_first');
+		}
+
 		// 제출받은 데이터 불러오기
 		$vars = Context::getRequestVars();
 		$config->block_clouds['method'] = $vars->block_method;
@@ -218,5 +234,141 @@ class Admin extends Base
 		// 설정 화면으로 리다이렉트
 		$this->setMessage('success_registed');
 		$this->setRedirectUrl(Context::get('success_return_url'));
+	}
+
+	/**
+	 * 국가 IP 대역 DB 가져오기
+	 */
+	public function procAllbandazoleAdminImportCountries()
+	{
+		// DB 테이블 확인
+		$oDB = DB::getInstance();
+		if (!$oDB->isTableExists('allbandazole_countries'))
+		{
+			return new BaseObject(-1, 'cmd_allbandazole_create_table');
+		}
+
+		// 다운로드
+		$url = 'https://storage.poesis.kr/downloads/country-ip/country-ip.csv.gz';
+		$temp_path = \RX_BASEDIR . 'files/cache/allbandazole/country-ip.csv.gz';
+		$request = HTTP::download($url, $temp_path);
+		if ($request->getStatusCode() !== 200)
+		{
+			return new BaseObject(-1, 'cmd_allbandazole_update_failed');
+		}
+		if (!file_exists($temp_path) || !filesize($temp_path))
+		{
+			return new BaseObject(-1, 'cmd_allbandazole_update_failed');
+		}
+
+		// 디버그 모드 비활성화
+		$debug_status = Debug::isEnabledForCurrentUser();
+		if ($debug_status)
+		{
+			Debug::disable();
+		}
+
+		// DB 초기화
+		$oDB->query('TRUNCATE TABLE allbandazole_countries');
+
+		// 데이터 들여오기
+		$fp = gzopen($temp_path, 'r');
+		if (!$fp)
+		{
+			return new BaseObject(-1, 'cmd_allbandazole_update_failed');
+		}
+		$stmt = $oDB->prepare('INSERT INTO allbandazole_countries (`start_ip`, `end_ip`, `country`) VALUES (?, ?, ?)');
+		$oDB->beginTransaction();
+		while ($row = fgetcsv($fp))
+		{
+			$stmt->execute(array_slice($row, 0, 3));
+		}
+		$oDB->commit();
+		$oDB->query('ANALYZE TABLE allbandazole_countries');
+		gzclose($fp);
+		unlink($temp_path);
+
+		// 디버그 모드 복원
+		if ($debug_status)
+		{
+			Debug::enable();
+		}
+
+		// 설정 저장
+		$config = ConfigModel::getConfig();
+		$config->block_countries['updated'] = time();
+		ConfigModel::setConfig($config);
+
+		// 결과 반환
+		$this->setMessage('cmd_allbandazole_updated');
+		$this->add('timestamp', date('Y-m-d H:i:s'));
+	}
+
+	/**
+	 * 클라우드 IP 대역 DB 가져오기
+	 */
+	public function procAllbandazoleAdminImportClouds()
+	{
+		// DB 테이블 확인
+		$oDB = DB::getInstance();
+		if (!$oDB->isTableExists('allbandazole_clouds'))
+		{
+			return new BaseObject(-1, 'cmd_allbandazole_create_table');
+		}
+
+		// 다운로드
+		$url = 'https://storage.poesis.kr/downloads/cloud-ip/cloud-ip.csv.gz';
+		$temp_path = \RX_BASEDIR . 'files/cache/allbandazole/cloud-ip.csv.gz';
+		$request = HTTP::download($url, $temp_path);
+		if ($request->getStatusCode() !== 200)
+		{
+			return new BaseObject(-1, 'cmd_allbandazole_update_failed');
+		}
+		if (!file_exists($temp_path) || !filesize($temp_path))
+		{
+			return new BaseObject(-1, 'cmd_allbandazole_update_failed');
+		}
+
+		// 디버그 모드 비활성화
+		$debug_status = Debug::isEnabledForCurrentUser();
+		if ($debug_status)
+		{
+			Debug::disable();
+		}
+
+		// DB 초기화
+		$oDB->query('TRUNCATE TABLE allbandazole_clouds');
+
+		// 데이터 들여오기
+		$fp = gzopen($temp_path, 'r');
+		if (!$fp)
+		{
+			return new BaseObject(-1, 'cmd_allbandazole_update_failed');
+		}
+		$stmt = $oDB->prepare('INSERT INTO allbandazole_clouds (`start_ip`, `end_ip`, `cloud`, `region`) VALUES (?, ?, ?, ?)');
+		$oDB->beginTransaction();
+		while ($row = fgetcsv($fp))
+		{
+			$stmt->execute(array_slice($row, 0, 4));
+		}
+		$oDB->commit();
+		$oDB->query('ANALYZE TABLE allbandazole_clouds');
+		gzclose($fp);
+		unlink($temp_path);
+
+		// 디버그 모드 복원
+		if ($debug_status)
+		{
+			Debug::enable();
+		}
+
+		// 설정 저장
+		$config = ConfigModel::getConfig();
+		$config->block_clouds['updated'] = time();
+		ConfigModel::setConfig($config);
+
+		// 결과 반환
+		$this->setMessage('cmd_allbandazole_updated');
+		$this->add('timestamp', date('Y-m-d H:i:s'));
 	}
 }

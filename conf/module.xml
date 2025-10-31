@@ -10,6 +10,8 @@
 		<action name="procAllbandazoleAdminSaveConfig" class="Controllers\Admin" />
 		<action name="procAllbandazoleAdminSaveCountries" class="Controllers\Admin" />
 		<action name="procAllbandazoleAdminSaveClouds" class="Controllers\Admin" />
+		<action name="procAllbandazoleAdminImportCountries" class="Controllers\Admin" />
+		<action name="procAllbandazoleAdminImportClouds" class="Controllers\Admin" />
 		<action name="procAllbandazoleSubmitCaptcha" class="Controllers\Captcha" />
 	</actions>
 	<eventHandlers>

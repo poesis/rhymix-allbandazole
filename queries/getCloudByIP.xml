@@ -1,0 +1,13 @@
+<query id="getCloudByIP" action="select">
+	<tables>
+		<table name="allbandazole_clouds" />
+	</tables>
+	<columns>
+		<column name="cloud" />
+		<column name="region" />
+	</columns>
+	<conditions>
+		<condition operation="gte" column="start_ip" var="ip" />
+		<condition operation="lte" column="end_ip" var="ip" />
+	</conditions>
+</query>
