@@ -307,17 +307,15 @@ class Admin extends Base
 			Debug::disable();
 		}
 
-		// DB 초기화
-		$oDB->query('TRUNCATE TABLE allbandazole_countries');
-
 		// 데이터 들여오기
 		$fp = gzopen($temp_path, 'r');
 		if (!$fp)
 		{
 			throw new Exception('cmd_allbandazole_update_failed');
 		}
-		$stmt = $oDB->prepare('INSERT INTO allbandazole_countries (`start_ip`, `end_ip`, `country`) VALUES (?, ?, ?)');
+		$oDB->query('TRUNCATE TABLE allbandazole_countries');
 		$oDB->beginTransaction();
+		$stmt = $oDB->prepare('INSERT INTO allbandazole_countries (`start_ip`, `end_ip`, `country`) VALUES (?, ?, ?)');
 		while ($row = fgetcsv($fp))
 		{
 			$stmt->execute(array_slice($row, 0, 3));
@@ -375,17 +373,15 @@ class Admin extends Base
 			Debug::disable();
 		}
 
-		// DB 초기화
-		$oDB->query('TRUNCATE TABLE allbandazole_clouds');
-
 		// 데이터 들여오기
 		$fp = gzopen($temp_path, 'r');
 		if (!$fp)
 		{
 			throw new Exception('cmd_allbandazole_update_failed');
 		}
-		$stmt = $oDB->prepare('INSERT INTO allbandazole_clouds (`start_ip`, `end_ip`, `cloud`, `region`) VALUES (?, ?, ?, ?)');
+		$oDB->query('TRUNCATE TABLE allbandazole_clouds');
 		$oDB->beginTransaction();
+		$stmt = $oDB->prepare('INSERT INTO allbandazole_clouds (`start_ip`, `end_ip`, `cloud`, `region`) VALUES (?, ?, ?, ?)');
 		while ($row = fgetcsv($fp))
 		{
 			$stmt->execute(array_slice($row, 0, 4));
