@@ -71,6 +71,15 @@
 		</div>
 	</section>
 
+	<section class="section">
+		<div class="x_control-group">
+			<label class="x_control-label" for="ip_whitelist">{{ $lang->cmd_allbandazole_captcha_pass_time }}</label>
+			<div class="x_controls">
+				<input type="number" name="captcha_pass_time" id="captcha_pass_time" value="{{ $config->captcha_pass_time ?? 0 }}" min="1" />
+			</div>
+		</div>
+	</section>
+
 	<div class="btnArea x_clearfix">
 		<button type="submit" class="x_btn x_btn-primary x_pull-right">{{ $lang->cmd_registration }}</button>
 	</div>

@@ -128,6 +128,7 @@ class Admin extends Base
 		if (is_array($vars->bot_whitelist ?? null) && in_array('bingbot', $vars->bot_whitelist)) {
 			$config->bot_whitelist['bingbot'] = true;
 		}
+		$config->captcha_pass_time = max(1, (int)$vars->captcha_pass_time);
 
 		// 현재 접속자가 차단될 수 있는지 확인
 		if ($config->user_agents_regexp && preg_match($config->user_agents_regexp, $_SERVER['HTTP_USER_AGENT'] ?? ''))

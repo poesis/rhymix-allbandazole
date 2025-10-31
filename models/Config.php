@@ -72,6 +72,10 @@ class Config
 					'updated' => 0,
 				];
 			}
+			if (!isset($config->captcha_pass_time))
+			{
+				$config->captcha_pass_time = 240;
+			}
 
 			self::$_cache = $config;
 		}

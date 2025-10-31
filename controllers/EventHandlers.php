@@ -38,7 +38,7 @@ class EventHandlers extends Base
 		}
 
 		// 접속 허용 세션이라면 리턴
-		if (isset($_SESSION['allbandazole_bypass']) && $_SESSION['allbandazole_bypass'] > time() - 14400)
+		if (isset($_SESSION['allbandazole_bypass']) && ($_SESSION['allbandazole_bypass'] > time() - ($config->captcha_pass_time * 60)))
 		{
 			return;
 		}

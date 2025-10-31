@@ -36,6 +36,7 @@ $lang->cmd_allbandazole_create_table = 'DB 테이블이 생성되지 않았습�
 $lang->cmd_allbandazole_countries_update_first = '국가별 IP 대역 업데이트를 먼저 해 주세요.';
 $lang->cmd_allbandazole_clouds_update_first = '클라우드 IP 대역 업데이트를 먼저 해 주세요.';
 $lang->cmd_allbandazole_captcha_type = '캡챠 타입';
+$lang->cmd_allbandazole_captcha_pass_time = '캡챠 인증 유지 시간 (분)';
 $lang->cmd_allbandazole_not_a_bot = '나는 로봇이 아닙니다';
 $lang->msg_allbandazole_captcha_help = '아래 설정은 <a href="%s" target="_blank">스팸필터 모듈</a>의 캡챠 설정을 따릅니다.<br />일반적인 로그인, 글쓰기 등에서 캡챠 사용을 원하지 않는다면 스팸필터 모듈에서 캡챠 사용 여부 / Site Key / Secret Key 까지만 입력하고, 적용 대상은 선택하지 않으면 됩니다.';
 $lang->msg_allbandazole_captcha_not_use = '구충제 모듈에서 캡챠를 사용하는 설정이 있으나, 스팸필터 모듈에서 캡챠를 사용하지 않도록 되어 있습니다. 설정을 확인해 주세요.';
