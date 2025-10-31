@@ -19,7 +19,7 @@ class IpFilter
 		$output = executeQuery('allbandazole.getCountryByIP', ['ip' => ip2long($ip)]);
 		if (isset($output->data) && isset($output->data->country))
 		{
-			if ($config->block_countries['type'] === 'all-kr' && $output->data->country !== 'KR')
+			if ($config->block_countries['type'] === 'all-kr' && $output->data->country !== 'KR' && $output->data->country !== 'XX')
 			{
 				return true;
 			}

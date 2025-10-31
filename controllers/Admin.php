@@ -7,9 +7,10 @@ use Rhymix\Framework\Debug;
 use Rhymix\Framework\Exception;
 use Rhymix\Framework\HTTP;
 use Rhymix\Framework\i18n;
-use Rhymix\Framework\Filters\IpFilter;
+use Rhymix\Framework\Filters\IpFilter as RhymixIpFilter;
 use Rhymix\Modules\Allbandazole\Models\Blacklist as BlacklistModel;
 use Rhymix\Modules\Allbandazole\Models\Config as ConfigModel;
+use Rhymix\Modules\Allbandazole\Models\IpFilter as IpFilterModel;
 use BaseObject;
 use Context;
 use ModuleModel;
@@ -133,9 +134,9 @@ class Admin extends Base
 		{
 			throw new Exception('msg_allbandazole_your_user_agent');
 		}
-		if ($config->ip_blocks && IpFilter::inRanges(\RX_CLIENT_IP, $config->ip_blocks))
+		if ($config->ip_blocks && RhymixIpFilter::inRanges(\RX_CLIENT_IP, $config->ip_blocks))
 		{
-			if (!$config->ip_whitelist || !IpFilter::inRanges(\RX_CLIENT_IP, $config->ip_whitelist))
+			if (!$config->ip_whitelist || !RhymixIpFilter::inRanges(\RX_CLIENT_IP, $config->ip_whitelist))
 			{
 				throw new Exception('msg_allbandazole_your_ip_block');
 			}
@@ -185,6 +186,15 @@ class Admin extends Base
 			$config->block_countries['list'][$country_code] = true;
 		}
 
+		// 현재 접속자가 차단될 수 있는지 확인
+		if ($config->block_countries['type'] !== 'none' && IpFilterModel::isBlockedCountry(\RX_CLIENT_IP, $config))
+		{
+			if (!$config->ip_whitelist || !RhymixIpFilter::inRanges(\RX_CLIENT_IP, $config->ip_whitelist))
+			{
+				throw new Exception('msg_allbandazole_your_ip_block');
+			}
+		}
+
 		// 변경된 설정을 저장
 		$output = ConfigModel::setConfig($config);
 		if (!$output->toBool())
@@ -222,6 +232,15 @@ class Admin extends Base
 		foreach ($vars->block_clouds ?? [] as $cloud)
 		{
 			$config->block_clouds['list'][$cloud] = true;
+		}
+
+		// 현재 접속자가 차단될 수 있는지 확인
+		if (IpFilterModel::isBlockedCloud(\RX_CLIENT_IP, $config))
+		{
+			if (!$config->ip_whitelist || !RhymixIpFilter::inRanges(\RX_CLIENT_IP, $config->ip_whitelist))
+			{
+				throw new Exception('msg_allbandazole_your_ip_block');
+			}
 		}
 
 		// 변경된 설정을 저장
