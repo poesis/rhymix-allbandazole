@@ -20,6 +20,7 @@
 	<menus>
 		<menu name="allbandazole" type="all">
 			<title xml:lang="ko">구충제 모듈</title>
+			<title xml:lang="en">ALL-BAN-dazole Module</title>
 		</menu>
 	</menus>
 </module>
