@@ -3,13 +3,14 @@
 		<table name="allbandazole_countries" />
 	</tables>
 	<columns>
+		<column name="start_ip" />
 		<column name="country" />
 	</columns>
 	<conditions>
-		<condition operation="lte" column="start_ip" var="ip" />
 		<condition operation="gte" column="end_ip" var="ip" />
 	</conditions>
 	<navigation>
+		<index default="end_ip" order="asc" />
 		<list_count default="1" />
 	</navigation>
 </query>

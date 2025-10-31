@@ -16,8 +16,9 @@ class IpFilter
 	 */
 	public static function isBlockedCountry(string $ip, object $config): bool
 	{
-		$output = executeQuery('allbandazole.getCountryByIP', ['ip' => ip2long($ip)]);
-		if (isset($output->data) && isset($output->data->country))
+		$ip2long = ip2long($ip);
+		$output = executeQuery('allbandazole.getCountryByIP', ['ip' => $ip2long]);
+		if (isset($output->data) && isset($output->data->country) && $output->data->start_ip <= $ip2long)
 		{
 			if ($config->block_countries['type'] === 'all-kr' && $output->data->country !== 'KR' && $output->data->country !== 'XX')
 			{
@@ -40,8 +41,9 @@ class IpFilter
 	 */
 	public static function isBlockedCloud(string $ip, object $config): bool
 	{
-		$output = executeQuery('allbandazole.getCloudByIP', ['ip' => ip2long($ip)]);
-		if (isset($output->data) && isset($output->data->cloud))
+		$ip2long = ip2long($ip);
+		$output = executeQuery('allbandazole.getCloudByIP', ['ip' => $ip2long]);
+		if (isset($output->data) && isset($output->data->cloud) && $output->data->start_ip <= $ip2long)
 		{
 			if (isset($config->block_clouds['list'][$output->data->cloud]))
 			{
