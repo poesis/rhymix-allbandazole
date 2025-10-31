@@ -3,8 +3,12 @@
 namespace Rhymix\Modules\Allbandazole\Controllers;
 
 use Rhymix\Framework\Filters\IpFilter as RhymixIpFilter;
+use Rhymix\Framework\Session;
+use Rhymix\Framework\Template;
 use Rhymix\Modules\Allbandazole\Models\Config as ConfigModel;
 use Rhymix\Modules\Allbandazole\Models\IpFilter as IpFilterModel;
+use Context;
+use ModuleModel;
 
 /**
  * 구충제 모듈
@@ -15,6 +19,11 @@ use Rhymix\Modules\Allbandazole\Models\IpFilter as IpFilterModel;
  */
 class EventHandlers extends Base
 {
+	/**
+	 * 로그인 전에 접근할 수 있는 화면 목록
+	 */
+	public const PRE_LOGIN_ACTS = '/^dispMember(Login|SignUp|Insert|FindAccount|AuthAccount)|procAllbandazoleSubmitCaptcha$/';
+
 	/**
 	 * moduleHandler.init 시점에 실행
 	 */
@@ -69,16 +78,33 @@ class EventHandlers extends Base
 		// 국가 차단 대상인지 확인
 		if ($config->block_countries['type'] !== 'none')
 		{
-			if (IpFilterModel::isBlockedCountry(\RX_CLIENT_IP, $config))
+			if ($config->block_countries['method'] === 'login' && (Session::isMember() || preg_match(self::PRE_LOGIN_ACTS, Context::get('act') ?? '')))
+			{
+				if (Session::isMember())
+				{
+					$_SESSION['allbandazole_bypass'] = time();
+				}
+			}
+			elseif (IpFilterModel::isBlockedCountry(\RX_CLIENT_IP, $config))
 			{
 				return $this->_block($config->block_countries['method'] ?? 'simple');
 			}
 		}
 
 		// 클라우드 차단 대상인지 확인
-		if (IpFilterModel::isBlockedCloud(\RX_CLIENT_IP, $config))
+		if (count($config->block_clouds['list'] ?? []) > 0)
 		{
-			return $this->_block($config->block_clouds['method'] ?? 'simple');
+			if ($config->block_clouds['method'] === 'login' && (Session::isMember() || preg_match(self::PRE_LOGIN_ACTS, Context::get('act') ?? '')))
+			{
+				if (Session::isMember())
+				{
+					$_SESSION['allbandazole_bypass'] = time();
+				}
+			}
+			elseif (IpFilterModel::isBlockedCloud(\RX_CLIENT_IP, $config))
+			{
+				return $this->_block($config->block_clouds['method'] ?? 'simple');
+			}
 		}
 	}
 
@@ -131,8 +157,19 @@ class EventHandlers extends Base
 	 */
 	protected function _blockCaptcha()
 	{
-		// TODO
-		echo 'CAPTCHA REQUIRED';
+		// 캡챠 생성
+		$config = ModuleModel::getModuleConfig('spamfilter') ?? new \stdClass();
+		$captcha_class = 'Rhymix\\Modules\\Spamfilter\\Captcha\\' . $config->captcha->type;
+		$captcha_class::init($config->captcha);
+		$captcha = new $captcha_class();
+		$captcha->addScripts();
+		Context::set('captcha', $captcha);
+		Context::set('config', $config);
+
+		$css_file = 'modules/allbandazole/views/styles.css';
+		Context::set('static_css_path', \RX_BASEURL . $css_file . '?v=' . filemtime(\RX_BASEDIR . $css_file));
+		$tpl = new Template($this->module_path . 'views', 'captcha.blade.php');
+		echo $tpl->compile();
 	}
 
 	/**
@@ -142,7 +179,9 @@ class EventHandlers extends Base
 	 */
 	protected function _blockLogin()
 	{
-		// TODO
-		echo 'LOGIN REQUIRED';
+		$css_file = 'modules/allbandazole/views/styles.css';
+		Context::set('static_css_path', \RX_BASEURL . $css_file . '?v=' . filemtime(\RX_BASEDIR . $css_file));
+		$tpl = new Template($this->module_path . 'views', 'login.blade.php');
+		echo $tpl->compile();
 	}
 }

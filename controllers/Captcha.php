@@ -2,11 +2,6 @@
 
 namespace Rhymix\Modules\Allbandazole\Controllers;
 
-use Rhymix\Framework\Exception;
-use Rhymix\Framework\i18n;
-use Rhymix\Framework\Filters\IpFilter;
-use Rhymix\Modules\Allbandazole\Models\Blacklist as BlacklistModel;
-use Rhymix\Modules\Allbandazole\Models\Config as ConfigModel;
 use Context;
 use ModuleModel;
 
@@ -24,6 +19,24 @@ class Captcha extends Base
 	 */
 	public function procAllbandazoleSubmitCaptcha()
 	{
+		// 스팸필터 모듈 사용
+		$config = ModuleModel::getModuleConfig('spamfilter') ?? new \stdClass();
+		$captcha_class = 'Rhymix\\Modules\\Spamfilter\\Captcha\\' . $config->captcha->type;
+		$captcha_class::init($config->captcha);
+		try
+		{
+			$captcha_class::check();
 
+			// 캡챠 통과시 세션에 기록
+			$_SESSION['allbandazole_bypass'] = time();
+		}
+		catch (\Exception $e)
+		{
+			// 오류 발생시 아무 것도 하지 않음
+		}
+
+		// 이전 화면으로 리다이렉트
+		$referer = $_SERVER['HTTP_REFERER'] ?? \RX_BASEURL;
+		$this->setRedirectUrl($referer);
 	}
 }

@@ -7,7 +7,10 @@
 		<column name="region" />
 	</columns>
 	<conditions>
-		<condition operation="gte" column="start_ip" var="ip" />
-		<condition operation="lte" column="end_ip" var="ip" />
+		<condition operation="lte" column="start_ip" var="ip" />
+		<condition operation="gte" column="end_ip" var="ip" />
 	</conditions>
+	<navigation>
+		<list_count default="1" />
+	</navigation>
 </query>

@@ -1,0 +1,105 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	font-family: Segoe UI, Malgun Gothic, system-ui, sans-serif;
+}
+
+.auth_form {
+	width: 400px;
+	max-width: calc(100vw - 40px);
+	margin: 80px auto;
+	padding: 0 20px;
+	line-height: 150%;
+}
+
+.auth_form h1 {
+	font-size: 28px;
+	margin: 0 0 24px 0;
+	text-align: center;
+}
+
+.auth_form p.description {
+	font-size: 14px;
+	margin: 0 0 28px 0;
+	text-align: center;
+}
+
+.auth_form form {
+	border-radius: 4px;
+	background-color: #FFFFFF;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.12), 0 6px 16px 0 rgba(0, 0, 0, 0.18);
+	padding: 18px 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.auth_form form fieldset {
+	display: flex;
+	align-items: center;
+	border: 0;
+	margin: 0;
+	padding: 0;
+}
+
+.auth_form form fieldset label {
+	font-size: 14px;
+	width: 84px;
+}
+
+.auth_form form fieldset.captcha {
+	justify-content: center;
+}
+
+.auth_form form fieldset input[type=text],
+.auth_form form fieldset input[type=password] {
+	flex: 1;
+	font: 16px/150% Segoe UI, system-ui, sans-serif;
+	border: 1px solid #bbb;
+	padding: 0 4px;
+	border-radius: 2px;
+}
+
+.auth_form form fieldset button[type=submit] {
+	flex: 1;
+	border: 0;
+	border-radius: 4px;
+	margin-top: 8px;
+	padding: 8px 4px;
+	background: #1E88E5;
+	color: #fff;
+	cursor: pointer;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.auth_form form fieldset button[type=submit]:hover {
+	background: #1976D2;
+}
+
+.auth_form p.links {
+	font-size: 13px;
+	margin: 28px 0 48px 0;
+	text-align: center;
+	color: #666;
+}
+
+.auth_form p.links a {
+	text-decoration: none;
+	color: #888;
+}
+
+.auth_form p.links a:hover {
+	text-decoration: underline;
+}
+
+.auth_form p.credits {
+	position: fixed;
+	left: 0; bottom: 0;
+	width: 100%;
+	background-color: #E3F2FD;
+	color: #2196F3;
+	font-size: 12px;
+	padding: 12px 0;
+	text-align: center;
+}

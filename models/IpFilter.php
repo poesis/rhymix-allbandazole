@@ -2,9 +2,6 @@
 
 namespace Rhymix\Modules\Allbandazole\Models;
 
-use Rhymix\Framework\DB;
-use Rhymix\Framework\Session;
-
 /**
  * IP 필터
  */
@@ -19,18 +16,19 @@ class IpFilter
 	 */
 	public static function isBlockedCountry(string $ip, object $config): bool
 	{
-		if ($config->block_countries['type'] === 'none')
+		$output = executeQuery('allbandazole.getCountryByIP', ['ip' => ip2long($ip)]);
+		if (isset($output->data) && isset($output->data->country))
 		{
-			return false;
+			if ($config->block_countries['type'] === 'all-kr' && $output->data->country !== 'KR')
+			{
+				return true;
+			}
+			if ($config->block_countries['type'] === 'selected' && isset($config->block_countries['list'][$output->data->country]))
+			{
+				return true;
+			}
 		}
-		if ($config->block_countries['method'] === 'login' && Session::isMember())
-		{
-			$_SESSION['allbandazole_bypass'] = time();
-			return false;
-		}
-
-		// TODO
-		return true;
+		return false;
 	}
 
 	/**
@@ -42,17 +40,14 @@ class IpFilter
 	 */
 	public static function isBlockedCloud(string $ip, object $config): bool
 	{
-		if ($config->block_clouds['type'] === 'none' || empty($config->block_clouds['list']))
+		$output = executeQuery('allbandazole.getCloudByIP', ['ip' => ip2long($ip)]);
+		if (isset($output->data) && isset($output->data->cloud))
 		{
-			return false;
+			if (isset($config->block_clouds['list'][$output->data->cloud]))
+			{
+				return true;
+			}
 		}
-		if ($config->block_clouds['method'] === 'login' && Session::isMember())
-		{
-			$_SESSION['allbandazole_bypass'] = time();
-			return false;
-		}
-
-		// TODO
-		return true;
+		return false;
 	}
 }
