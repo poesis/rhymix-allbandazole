@@ -44,5 +44,5 @@ $lang->msg_allbandazole_captcha_not_enabled = '캡챠를 표시하려면 스팸�
 $lang->msg_allbandazole_multiline = '한 줄에 하나씩 입력해 주세요.';
 $lang->msg_allbandazole_your_user_agent = '현재 접속자도 차단될 수 있는 설정입니다. User-Agent를 다시 확인해 주세요.';
 $lang->msg_allbandazole_your_ip_block = '현재 접속자도 차단될 수 있는 설정입니다. IP 대역을 다시 확인해 주세요.';
-$lang->msg_allbandazole_required_login = "향상된 보안 조치로 인해,\n이 사이트에 접속하려면 로그인이 필요합니다.\n이용에 불편을 드려서 죄송합니다.";
-$lang->msg_allbandazole_required_captcha = "향상된 보안 조치로 인해,\n이 사이트에 접속하려면 인증이 필요합니다.\n이용에 불편을 드려서 죄송합니다.";
+$lang->msg_allbandazole_required_login = "향상된 보안 조치로 인해,\n이 사이트에 접속하려면 로그인이 필요합니다.";
+$lang->msg_allbandazole_required_captcha = "향상된 보안 조치로 인해,\n이 사이트에 접속하려면 인증이 필요합니다.";
