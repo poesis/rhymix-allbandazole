@@ -13,6 +13,10 @@
 		</div>
 	@endif
 
+	<div class="message">
+		<p>{!! $lang->msg_allbandazole_countries_help !!}</p>
+	</div>
+
 	<section class="section">
 		<div class="x_control-group">
 			<label class="x_control-label">{{ $lang->cmd_allbandazole_block_countries }}</label>

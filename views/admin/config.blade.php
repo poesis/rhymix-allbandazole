@@ -21,6 +21,7 @@
 					<option value="Y" @selected(!empty($config->enabled))>{{ $lang->cmd_yes }}</option>
 					<option value="N" @selected(!$config->enabled)>{{ $lang->cmd_no }}</option>
 				</select>
+				<p class="x_help-block">{{ $lang->msg_allbandazole_enabled }}</p>
 			</div>
 		</div>
 	</section>
@@ -67,6 +68,7 @@
 					<input type="checkbox" name="bot_whitelist[]" id="bot_whitelist_bingbot" value="bingbot" @checked(!empty($config->bot_whitelist['bingbot'])) />
 					Bingbot
 				</label>
+				<p class="x_help-block">{{ $lang->msg_allbandazole_bot_whitelist }}</p>
 			</div>
 		</div>
 	</section>
@@ -76,6 +78,7 @@
 			<label class="x_control-label" for="ip_whitelist">{{ $lang->cmd_allbandazole_captcha_pass_time }}</label>
 			<div class="x_controls">
 				<input type="number" name="captcha_pass_time" id="captcha_pass_time" value="{{ $config->captcha_pass_time ?? 0 }}" min="1" />
+				<p class="x_help-block">{{ $lang->msg_allbandazole_captcha_pass_time }}</p>
 			</div>
 		</div>
 	</section>
