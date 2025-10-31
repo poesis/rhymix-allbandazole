@@ -196,6 +196,16 @@ class Admin extends Base
 			}
 		}
 
+		// 캡챠 사용 가능 여부 확인
+		if ($config->block_countries['method'] === 'captcha')
+		{
+			$spamfilter_config = ModuleModel::getModuleConfig('spamfilter') ?? new \stdClass();
+			if (!isset($spamfilter_config->captcha->type) || $spamfilter_config->captcha->type === 'none')
+			{
+				throw new Exception('msg_allbandazole_captcha_not_enabled');
+			}
+		}
+
 		// 변경된 설정을 저장
 		$output = ConfigModel::setConfig($config);
 		if (!$output->toBool())
@@ -241,6 +251,16 @@ class Admin extends Base
 			if (!$config->ip_whitelist || !RhymixIpFilter::inRanges(\RX_CLIENT_IP, $config->ip_whitelist))
 			{
 				throw new Exception('msg_allbandazole_your_ip_block');
+			}
+		}
+
+		// 캡챠 사용 가능 여부 확인
+		if ($config->block_clouds['method'] === 'captcha')
+		{
+			$spamfilter_config = ModuleModel::getModuleConfig('spamfilter') ?? new \stdClass();
+			if (!isset($spamfilter_config->captcha->type) || $spamfilter_config->captcha->type === 'none')
+			{
+				throw new Exception('msg_allbandazole_captcha_not_enabled');
 			}
 		}
 

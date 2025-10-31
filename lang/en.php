@@ -40,6 +40,7 @@ $lang->cmd_allbandazole_captcha_pass_time = 'CAPTCHA Validity (min)';
 $lang->cmd_allbandazole_not_a_bot = 'I am not a bot';
 $lang->msg_allbandazole_captcha_help = 'The settings below follow the CAPTCHA settings of the <a href="%s" target="_blank">Spam Filter Module</a>.<br />If you do not want to use CAPTCHA in general, you only need to fill the Use CAPTCHA / Site Key / Secret Key settings in the Spam Filter Module, without selecting any targets.';
 $lang->msg_allbandazole_captcha_not_use = 'There are settings to use CAPTCHA in the deworming module, but it is set not to use CAPTCHA in the spam filter module. Please check the settings.';
+$lang->msg_allbandazole_captcha_not_enabled = 'To require CAPTCHA, please enable CAPTCHA in the Spam Filter Module.';
 $lang->msg_allbandazole_multiline = 'Please enter one item per line.';
 $lang->msg_allbandazole_your_user_agent = 'This setting may also block the current user. Please check the User-Agent again.';
 $lang->msg_allbandazole_your_ip_block = 'This setting may also block the current user. Please check the IP ranges again.';

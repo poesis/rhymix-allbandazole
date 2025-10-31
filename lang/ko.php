@@ -40,6 +40,7 @@ $lang->cmd_allbandazole_captcha_pass_time = '캡챠 인증 유지 시간 (분)';
 $lang->cmd_allbandazole_not_a_bot = '나는 로봇이 아닙니다';
 $lang->msg_allbandazole_captcha_help = '아래 설정은 <a href="%s" target="_blank">스팸필터 모듈</a>의 캡챠 설정을 따릅니다.<br />일반적인 로그인, 글쓰기 등에서 캡챠 사용을 원하지 않는다면 스팸필터 모듈에서 캡챠 사용 여부 / Site Key / Secret Key 까지만 입력하고, 적용 대상은 선택하지 않으면 됩니다.';
 $lang->msg_allbandazole_captcha_not_use = '구충제 모듈에서 캡챠를 사용하는 설정이 있으나, 스팸필터 모듈에서 캡챠를 사용하지 않도록 되어 있습니다. 설정을 확인해 주세요.';
+$lang->msg_allbandazole_captcha_not_enabled = '캡챠를 표시하려면 스팸필터 모듈에서 캡챠를 사용하도록 설정해 주세요.';
 $lang->msg_allbandazole_multiline = '한 줄에 하나씩 입력해 주세요.';
 $lang->msg_allbandazole_your_user_agent = '현재 접속자도 차단될 수 있는 설정입니다. User-Agent를 다시 확인해 주세요.';
 $lang->msg_allbandazole_your_ip_block = '현재 접속자도 차단될 수 있는 설정입니다. IP 대역을 다시 확인해 주세요.';
