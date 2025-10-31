@@ -24,7 +24,7 @@
 			{!! $captcha !!}
 		</fieldset>
 		<fieldset>
-			<button type="submit">{{ lang('cmd_allbandazole_not_a_bot') }}</button>
+			<button type="submit">{{ lang('cmd_allbandazole_authenticate') }}</button>
 		</fieldset>
 	</form>
 	<p class="links">
