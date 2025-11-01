@@ -38,6 +38,8 @@ $lang->cmd_allbandazole_clouds_update_first = '클라우드 IP 대역 업데이�
 $lang->cmd_allbandazole_captcha_type = '캡챠 타입';
 $lang->cmd_allbandazole_captcha_pass_time = '캡챠 인증 유지 시간';
 $lang->cmd_allbandazole_authenticate = '인증하기';
+$lang->cmd_allbandazole_customize = '차단 화면 설정';
+$lang->cmd_allbandazole_custom_scripts = '하단 스크립트';
 $lang->msg_allbandazole_countries_help = '해외에서 AI 봇의 접속이 많은 경우, 국가 단위로 차단하거나 해외 접속을 모두 차단할 수 있습니다.<br />정상적인 해외 방문자에게 지나치게 큰 불편을 주지 않도록, 캡챠나 로그인을 통해 차단을 우회할 수 있도록 설정해 주세요.</p><p>국가 차단 기능은 국가별 IP 대역 DB에 의존하므로, 정기적으로 DB를 업데이트해 주어야 합니다.<br />오픈소스로 공개된 정보를 활용하므로, 국가 구분이 정확하지 않을 수 있습니다.';
 $lang->msg_allbandazole_clouds_help = '클라우드를 통해 다수의 서버 IP를 확보하고 돌려쓰며 무단 크롤링하는 봇을 차단할 수 있습니다.<br />개발자를 위한 API 서비스를 운영하지 않는 사이트라면, 클라우드 서버 IP를 통한 접속은 대부분 봇이라고 가정해도 무방합니다.</p><p>클라우드 차단 기능은 클라우드 IP 대역 DB에 의존하므로, 정기적으로 DB를 업데이트해 주어야 합니다.<br />오픈소스로 공개된 정보를 활용하므로, 업체 구분이 정확하지 않을 수 있습니다.';
 $lang->msg_allbandazole_captcha_help = '아래 설정은 <a href="%s" target="_blank">스팸필터 모듈</a>의 캡챠 설정을 따릅니다.<br />일반적인 로그인, 글쓰기 등에서 캡챠 사용을 원하지 않는다면 스팸필터 모듈에서 캡챠 사용 여부 / Site Key / Secret Key 까지만 입력하고, 적용 대상은 선택하지 않으면 됩니다.';
@@ -52,3 +54,5 @@ $lang->msg_allbandazole_your_ip_block = '현재 접속자도 차단될 수 있�
 $lang->msg_allbandazole_country_blocking_first = '국가 차단 설정이 클라우드 차단보다 우선합니다. 본사가 위치한 국가를 차단하면 클라우드도 모두 차단될 수 있습니다.';
 $lang->msg_allbandazole_required_login = "향상된 보안 조치로 인해,\n이 사이트에 접속하려면 로그인이 필요합니다.";
 $lang->msg_allbandazole_required_captcha = "향상된 보안 조치로 인해,\n이 사이트에 접속하려면 인증이 필요합니다.";
+$lang->msg_allbandazole_customize_help = '차단 화면(로그인 또는 캡챠)에 표시할 제목과 설명을 설정할 수 있습니다.<br />서버 부하와 트래픽을 줄이기 위해, 가능하면 단순하게 설정하는 것을 권장합니다.';
+$lang->msg_allbandazole_custom_scripts_help = '<script>, <style> 등의 HTML을 추가할 수 있습니다.';

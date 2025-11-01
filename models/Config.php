@@ -81,6 +81,13 @@ class Config
 			{
 				$config->captcha_pass_time = 240;
 			}
+			if (!isset($config->block_page))
+			{
+				$config->block_page = new \stdClass;
+				$config->block_page->title = null;
+				$config->block_page->description = null;
+				$config->block_page->scripts = null;
+			}
 
 			self::$_cache = $config;
 		}

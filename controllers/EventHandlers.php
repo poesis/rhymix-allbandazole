@@ -184,15 +184,14 @@ class EventHandlers extends Base
 	protected function _blockCaptcha()
 	{
 		// 스팸필터 모듈의 캡챠 기능을 이용
-		$config = ModuleModel::getModuleConfig('spamfilter') ?? new \stdClass();
-		if (isset($config->captcha->type) && $config->captcha->type !== 'none')
+		$spamfilter_config = ModuleModel::getModuleConfig('spamfilter') ?? new \stdClass();
+		if (isset($spamfilter_config->captcha->type) && $spamfilter_config->captcha->type !== 'none')
 		{
-			$captcha_class = 'Rhymix\\Modules\\Spamfilter\\Captcha\\' . $config->captcha->type;
-			$captcha_class::init($config->captcha);
+			$captcha_class = 'Rhymix\\Modules\\Spamfilter\\Captcha\\' . $spamfilter_config->captcha->type;
+			$captcha_class::init($spamfilter_config->captcha);
 			$captcha = new $captcha_class();
 			$captcha->addScripts();
 			Context::set('captcha', $captcha);
-			Context::set('config', $config);
 		}
 		else
 		{
@@ -204,6 +203,7 @@ class EventHandlers extends Base
 		Context::set('static_css_path', \RX_BASEURL . $css_file . '?v=' . filemtime(\RX_BASEDIR . $css_file));
 		$oHTMLDisplayHandler = new HTMLDisplayHandler;
 		$oHTMLDisplayHandler->_loadDesktopJSCSS();
+		Context::set('config', ConfigModel::getConfig());
 
 		// 템플릿 컴파일
 		$tpl = new Template($this->module_path . 'views', 'captcha.blade.php');
@@ -220,6 +220,9 @@ class EventHandlers extends Base
 		// 애셋 준비
 		$css_file = 'modules/allbandazole/views/styles.css';
 		Context::set('static_css_path', \RX_BASEURL . $css_file . '?v=' . filemtime(\RX_BASEDIR . $css_file));
+		$oHTMLDisplayHandler = new HTMLDisplayHandler;
+		$oHTMLDisplayHandler->_loadDesktopJSCSS();
+		Context::set('config', ConfigModel::getConfig());
 
 		// 템플릿 컴파일
 		$tpl = new Template($this->module_path . 'views', 'login.blade.php');

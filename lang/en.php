@@ -38,6 +38,8 @@ $lang->cmd_allbandazole_clouds_update_first = 'Please update the cloud IP ranges
 $lang->cmd_allbandazole_captcha_type = 'Captcha Type';
 $lang->cmd_allbandazole_captcha_pass_time = 'CAPTCHA Validity';
 $lang->cmd_allbandazole_authenticate = 'Authenticate';
+$lang->cmd_allbandazole_customize = 'Customize Block Page';
+$lang->cmd_allbandazole_custom_scripts = 'Custom Scripts';
 $lang->msg_allbandazole_countries_help = 'If there are many AI bots from overseas, you can block them by country, or block all overseas access.<br />Please ensure that normal visitors can bypass the block through CAPTCHA or login, so as not to cause excessive inconvenience.</p><p>Country blocking relies on a database of IP ranges, which must be updated regularly.<br />This database may not be completely accurate, as it is based on freely available information.';
 $lang->msg_allbandazole_clouds_help = 'These settings can help block bots that obtain and rotate through multiple server IPs through cloud services.<br />If your site does not provide an API for developers, it is safe to assume that most requests from cloud server IPs is from bots.</p><p>Cloud blocking relies on a database of IP ranges, which must be updated regularly.<br />This database may not be completely accurate, as it is based on freely available information.';
 $lang->msg_allbandazole_captcha_help = 'The settings below follow the CAPTCHA settings of the <a href="%s" target="_blank">Spam Filter Module</a>.<br />If you do not want to use CAPTCHA in general, you only need to fill the Use CAPTCHA / Site Key / Secret Key settings in the Spam Filter Module, without selecting any targets.';
@@ -52,3 +54,5 @@ $lang->msg_allbandazole_your_ip_block = 'This setting may also block the current
 $lang->msg_allbandazole_country_blocking_first = 'Country blocking takes precedence over cloud blocking. Clouds may be blocked if you block the country where their headquarters are located.';
 $lang->msg_allbandazole_required_login = "To confirm that you are not a robot,\nplease complete the login process below.";
 $lang->msg_allbandazole_required_captcha = "To confirm that you are not a robot,\nplease complete the CAPTCHA below.";
+$lang->msg_allbandazole_customize_help = 'You can set the title and content of the block page (login or CAPTCHA).<br />To reduce server load and traffic, it is recommended to keep this page as simple as possible.';
+$lang->msg_allbandazole_custom_scripts_help = 'You can add HTML such as <script> and <style>.';

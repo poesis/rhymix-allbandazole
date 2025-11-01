@@ -97,6 +97,19 @@ class Admin extends Base
 	}
 
 	/**
+	 * 차단 화면 설정
+	 */
+	public function dispAllbandazoleAdminCustomize()
+	{
+		// 모듈 설정 로딩
+		$config = ConfigModel::getConfig();
+		Context::set('config', $config);
+
+		// 템플릿 파일 지정
+		$this->setTemplateFile('customize');
+	}
+
+	/**
 	 * 기본 설정 저장
 	 */
 	public function procAllbandazoleAdminSaveConfig()
@@ -406,5 +419,31 @@ class Admin extends Base
 		// 결과 반환
 		$this->setMessage('cmd_allbandazole_updated');
 		$this->add('timestamp', date('Y-m-d H:i:s'));
+	}
+
+	/**
+	 * 차단 화면 설정 저장
+	 */
+	public function procAllbandazoleAdminCustomize()
+	{
+		// 현재 설정 상태 불러오기
+		$config = ConfigModel::getConfig();
+
+		// 제출받은 데이터 불러오기
+		$vars = Context::getRequestVars();
+		$config->block_page->title = trim($vars->block_title);
+		$config->block_page->description = trim($vars->block_description);
+		$config->block_page->scripts = trim($vars->block_scripts);
+
+		// 변경된 설정을 저장
+		$output = ConfigModel::setConfig($config);
+		if (!$output->toBool())
+		{
+			return $output;
+		}
+
+		// 설정 화면으로 리다이렉트
+		$this->setMessage('success_registed');
+		$this->setRedirectUrl(Context::get('success_return_url'));
 	}
 }

@@ -4,15 +4,22 @@
 	<meta charset="utf-8">
 	<meta name="generator" content="Rhymix">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>{{ Context::replaceUserLang($site_module_info->settings->title) }}</title>
+	<title>{{ Context::replaceUserLang($config->block_page->title ?? $site_module_info->settings->title) }}</title>
 	<link rel="stylesheet" href="{{ $static_css_path }}" />
+	@foreach (Context::getJsFile('head', true) as $js_file)
+	<script src="{!! $js_file['file'] !!}"{!! $js_file['attrs'] !!}></script>
+	@endforeach
 </head>
 <body>
 
 <div class="auth_form">
-	<h1>{{ Context::replaceUserLang($site_module_info->settings->title) }}</h1>
+	<h1>{{ Context::replaceUserLang($config->block_page->title ?? $site_module_info->settings->title) }}</h1>
 	<p class="description">
-		{{ lang('allbandazole.msg_allbandazole_required_login')|nl2br }}
+		@if (isset($config->block_page->description))
+			{{ Context::replaceUserLang($config->block_page->description)|nl2br }}
+		@else
+			{{ Context::replaceUserLang('allbandazole.msg_allbandazole_required_login')|nl2br }}
+		@endif
 	</p>
 	<form action="{{ \RX_BASEURL }}" method="post">
 		<input type="hidden" name="module" value="member" />
@@ -41,6 +48,16 @@
 <script>
 	document.getElementById('user_id').focus();
 </script>
+
+@if (isset($config->block_page->scripts))
+{!! $config->block_page->scripts !!}
+@endif
+
+{!! Context::getHtmlFooter() !!}
+
+@foreach (Context::getJsFile('body', true) as $js_file)
+<script src="{!! $js_file['file'] !!}"></script>
+@endforeach
 
 </body>
 </html>
