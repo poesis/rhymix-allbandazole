@@ -47,6 +47,7 @@ $lang->msg_allbandazole_captcha_not_use = 'There are settings to use CAPTCHA in 
 $lang->msg_allbandazole_captcha_not_enabled = 'To require CAPTCHA, please enable CAPTCHA in the Spam Filter Module.';
 $lang->msg_allbandazole_enabled = 'If not enabled, all settings will be ignored.';
 $lang->msg_allbandazole_multiline = 'Please enter one item per line.';
+$lang->msg_allbandazole_restore_defaults = 'Restore Defaults';
 $lang->msg_allbandazole_bot_whitelist = 'Check these boxes if you want non-Korean search engines to be able to access your site.';
 $lang->msg_allbandazole_captcha_pass_time = 'Set CAPTCHA Validity in minutes. The default is 4 hours (240 minutes).';
 $lang->msg_allbandazole_your_user_agent = 'This setting may also block the current user. Please check the User-Agent again.';

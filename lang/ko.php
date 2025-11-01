@@ -47,6 +47,7 @@ $lang->msg_allbandazole_captcha_not_use = '구충제 모듈에서 캡챠를 사�
 $lang->msg_allbandazole_captcha_not_enabled = '캡챠를 표시하려면 스팸필터 모듈에서 캡챠를 사용하도록 설정해 주세요.';
 $lang->msg_allbandazole_enabled = '사용하지 않으면 모든 설정이 무시됩니다.';
 $lang->msg_allbandazole_multiline = '한 줄에 하나씩 입력해 주세요.';
+$lang->msg_allbandazole_restore_defaults = '기본값 복원';
 $lang->msg_allbandazole_bot_whitelist = '해외 검색엔진이 접근할 수 있도록 하려면 이 옵션을 선택해 주세요.';
 $lang->msg_allbandazole_captcha_pass_time = '캡챠 인증이 유효한 시간을 분 단위로 설정합니다. 기본값은 4시간(240분)입니다.';
 $lang->msg_allbandazole_your_user_agent = '현재 접속자도 차단될 수 있는 설정입니다. User-Agent를 다시 확인해 주세요.';

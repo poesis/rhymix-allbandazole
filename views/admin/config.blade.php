@@ -31,7 +31,12 @@
 			<label class="x_control-label" for="user_agents">{{ $lang->cmd_allbandazole_user_agents }}</label>
 			<div class="x_controls">
 				<textarea name="user_agents" id="user_agents" class="x_full-width">{{ implode("\n", $config->user_agents) . "\n" }}</textarea>
-				<p class="x_help-block">{{ $lang->msg_allbandazole_multiline }}</p>
+				<p class="x_help-block">
+					{{ $lang->msg_allbandazole_multiline }}
+					<a href="#" class="restore_default_user_agents" data-defaults="@json(Rhymix\Modules\Allbandazole\Models\Blacklist::USER_AGENTS)">
+						{{ $lang->msg_allbandazole_restore_defaults }}
+					</a>
+				</p>
 			</div>
 		</div>
 	</section>
@@ -41,7 +46,12 @@
 			<label class="x_control-label" for="ip_blocks">{{ $lang->cmd_allbandazole_ip_blocks }}</label>
 			<div class="x_controls">
 				<textarea name="ip_blocks" id="ip_blocks" class="x_full-width">{{ implode("\n", $config->ip_blocks) . "\n" }}</textarea>
-				<p class="x_help-block">{{ $lang->msg_allbandazole_multiline }}</p>
+				<p class="x_help-block">
+					{{ $lang->msg_allbandazole_multiline }}
+					<a href="#" class="restore_default_ip_blocks" data-defaults="@json(Rhymix\Modules\Allbandazole\Models\Blacklist::IP_BLOCKS)">
+						{{ $lang->msg_allbandazole_restore_defaults }}
+					</a>
+				</p>
 			</div>
 		</div>
 	</section>

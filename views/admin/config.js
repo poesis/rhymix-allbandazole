@@ -1,6 +1,16 @@
 (function($) {
 	$(function() {
 
+		$('.restore_default_user_agents').on('click', function(e) {
+			e.preventDefault();
+			$('#user_agents').val($(this).data('defaults').join('\n') +'\n');
+		});
+
+		$('.restore_default_ip_blocks').on('click', function(e) {
+			e.preventDefault();
+			$('#ip_blocks').val($(this).data('defaults').join('\n') +'\n');
+		});
+
 		$('input[name="block_type"]').on('change', function() {
 			if ($(this).val() === 'selected' && $(this).is(':checked')) {
 				$('.visible-when-selected').show();
