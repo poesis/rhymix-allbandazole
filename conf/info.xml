@@ -4,8 +4,8 @@
 	<title xml:lang="en">ALL-BAN-dazole Module</title>
 	<description xml:lang="ko">서버 자원과 트래픽을 빨아먹는 기생충 로봇을 차단합니다.</description>
 	<description xml:lang="en">Block robots that consume your server resources and traffic like parasites.</description>
-	<version>2.0.0</version>
-	<date>2025-10-31</date>
+	<version>2.0.1</version>
+	<date>2025-11-01</date>
 	<category>service</category>
 	<author email_address="kijin@poesis.dev" link="https://www.poesis.dev">
 		<name xml:lang="ko">POESIS</name>
