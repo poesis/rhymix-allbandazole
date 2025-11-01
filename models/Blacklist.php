@@ -95,6 +95,7 @@ class Blacklist
 			'vultr' => 'Vultr',
 		],
 		'eu' => [
+			'contabo' => 'Contabo',
 			'hetzner' => 'Hetzner',
 			'ovh' => 'OVH',
 			'scaleway' => 'Scaleway',
