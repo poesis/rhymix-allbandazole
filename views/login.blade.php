@@ -18,7 +18,7 @@
 		@if (isset($config->block_page->description))
 			{{ Context::replaceUserLang($config->block_page->description)|nl2br }}
 		@else
-			{{ Context::replaceUserLang('allbandazole.msg_allbandazole_required_login')|nl2br }}
+			{{ lang('allbandazole.msg_allbandazole_required_login')|nl2br }}
 		@endif
 	</p>
 	<form action="{{ \RX_BASEURL }}" method="post">
