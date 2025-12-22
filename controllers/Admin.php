@@ -185,7 +185,7 @@ class Admin extends Base
 		// 제출받은 데이터 불러오기
 		$vars = Context::getRequestVars();
 		$config->block_countries['type'] = $vars->block_type;
-		if (!in_array($config->block_countries['type'], ['none', 'all-kr', 'selected']))
+		if (!in_array($config->block_countries['type'], ['none', 'selected', 'except-selected', 'all-kr']))
 		{
 			$config->block_countries['type'] = 'none';
 		}

@@ -14,6 +14,7 @@ $lang->cmd_allbandazole_block_countries = '차단할 국가';
 $lang->cmd_allbandazole_block_none = '차단하지 않음';
 $lang->cmd_allbandazole_block_all_kr = '대한민국 제외 모두 차단';
 $lang->cmd_allbandazole_block_selected = '선택한 국가 차단';
+$lang->cmd_allbandazole_block_except_selected = '선택한 국가 제외 모두 차단';
 $lang->cmd_allbandazole_block_method = '차단 방법';
 $lang->cmd_allbandazole_block_method_simple = '무조건 차단';
 $lang->cmd_allbandazole_block_method_captcha = '캡챠 표시';

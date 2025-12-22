@@ -26,12 +26,16 @@
 					{{ $lang->cmd_allbandazole_block_none }}
 				</label>
 				<label class="x_inline">
-					<input type="radio" name="block_type" value="all-kr" @checked($config->block_countries['type'] === 'all-kr') />
-					{{ $lang->cmd_allbandazole_block_all_kr }}
-				</label>
-				<label class="x_inline">
 					<input type="radio" name="block_type" value="selected" @checked($config->block_countries['type'] === 'selected') />
 					{{ $lang->cmd_allbandazole_block_selected }}
+				</label>
+				<label class="x_inline">
+					<input type="radio" name="block_type" value="except-selected" @checked($config->block_countries['type'] === 'except-selected') />
+					{{ $lang->cmd_allbandazole_block_except_selected }}
+				</label>
+				<label class="x_inline">
+					<input type="radio" name="block_type" value="all-kr" @checked($config->block_countries['type'] === 'all-kr') />
+					{{ $lang->cmd_allbandazole_block_all_kr }}
 				</label>
 			</div>
 		</div>

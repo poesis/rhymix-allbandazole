@@ -14,6 +14,7 @@ $lang->cmd_allbandazole_block_countries = 'Blocked Countries';
 $lang->cmd_allbandazole_block_none = 'No Blocking';
 $lang->cmd_allbandazole_block_all_kr = 'Block All Except Korea';
 $lang->cmd_allbandazole_block_selected = 'Block Selected Countries';
+$lang->cmd_allbandazole_block_except_selected = 'Block All Except Selected Countries';
 $lang->cmd_allbandazole_block_method = 'Blocking Method';
 $lang->cmd_allbandazole_block_method_simple = 'Always Block';
 $lang->cmd_allbandazole_block_method_captcha = 'Require CAPTCHA';

@@ -20,11 +20,15 @@ class IpFilter
 		$output = executeQuery('allbandazole.getCountryByIP', ['ip' => $ip2long]);
 		if (isset($output->data) && isset($output->data->country) && $output->data->start_ip <= $ip2long)
 		{
-			if ($config->block_countries['type'] === 'all-kr' && $output->data->country !== 'KR' && $output->data->country !== 'XX')
+			if ($config->block_countries['type'] === 'selected' && isset($config->block_countries['list'][$output->data->country]))
 			{
 				return true;
 			}
-			if ($config->block_countries['type'] === 'selected' && isset($config->block_countries['list'][$output->data->country]))
+			if ($config->block_countries['type'] === 'except-selected' && $output->data->country !== 'XX' && !isset($config->block_countries['list'][$output->data->country]))
+			{
+				return true;
+			}
+			if ($config->block_countries['type'] === 'all-kr' && $output->data->country !== 'XX' && $output->data->country !== 'KR')
 			{
 				return true;
 			}
