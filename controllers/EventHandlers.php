@@ -51,7 +51,7 @@ class EventHandlers extends Base
 
 		// 항상 허용할 로봇이라면 리턴
 		$user_agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
-		if (isset($config->bot_whitelist['googlebot']) && preg_match('/Googlebot[-\/]|Mediapartners-Google/', $user_agent))
+		if (isset($config->bot_whitelist['googlebot']) && preg_match('/Googlebot[-\/]|Mediapartners-Google|Google-InspectionTool/', $user_agent))
 		{
 			return;
 		}
