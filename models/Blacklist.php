@@ -79,6 +79,7 @@ class Blacklist
 	 */
 	public const IP_BLOCKS = [
 		'222.239.104.0/24',
+		'125.132.9.0/24',
 	];
 
 	/**
