@@ -131,6 +131,6 @@ class Config
 		$encoded_user_agents = array_map(function($str) {
 			return preg_quote($str, '/');
 		}, $user_agents);
-		return sprintf('/\\b(%s)\\b/', implode('|', $encoded_user_agents));
+		return sprintf('/\\b(%s)\\b/i', implode('|', $encoded_user_agents));
 	}
 }
