@@ -19,7 +19,7 @@ class Blacklist
 		'Applebot',
 		'Arachni',
 		'AwarioBot',
-		'BaiduSpider',
+		'Baiduspider',
 		'Barkrowler',
 		'bbot',
 		'BLEXBot',
