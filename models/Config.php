@@ -77,6 +77,13 @@ class Config
 					'updated' => 0,
 				];
 			}
+			if (!isset($config->block_heuristic))
+			{
+				$config->block_heuristic = [
+					'enabled' => false,
+					'method' => 'simple',
+				];
+			}
 			if (!isset($config->captcha_pass_time))
 			{
 				$config->captcha_pass_time = 240;

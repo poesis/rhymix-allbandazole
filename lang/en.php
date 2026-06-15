@@ -18,6 +18,7 @@ $lang->cmd_allbandazole_block_selected = 'Block Selected Countries';
 $lang->cmd_allbandazole_block_except_selected = 'Block All Except Selected Countries';
 $lang->cmd_allbandazole_block_method = 'Blocking Method';
 $lang->cmd_allbandazole_block_method_simple = 'Always Block';
+$lang->cmd_allbandazole_block_method_redirect = 'Redirect';
 $lang->cmd_allbandazole_block_method_captcha = 'Require CAPTCHA';
 $lang->cmd_allbandazole_block_method_login = 'Require Login';
 $lang->cmd_allbandazole_select_countries = 'Select Countries';

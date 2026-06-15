@@ -117,4 +117,17 @@ class Blacklist
 			'smileserv' => 'Smileserv (cloudv, iwinv)',
 		]
 	];
+
+	/**
+	 * GET parameters used by heuristic blocking
+	 */
+	public const GET_PARAMS = [
+		'page',
+		'cpage',
+		'listStyle',
+		'sort_index',
+		'order_type',
+		'division',
+		'last_division',
+	];
 }

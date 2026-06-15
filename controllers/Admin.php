@@ -318,7 +318,7 @@ class Admin extends Base
 			$config->block_heuristic['enabled'] = true;
 		}
 		$config->block_heuristic['method'] = $vars->block_method;
-		if (!in_array($config->block_heuristic['method'], ['simple', 'captcha', 'login']))
+		if (!in_array($config->block_heuristic['method'], ['simple', 'redirect', 'captcha', 'login']))
 		{
 			$config->block_heuristic['method'] = 'simple';
 		}

@@ -5,6 +5,7 @@ namespace Rhymix\Modules\Allbandazole\Controllers;
 use Rhymix\Framework\Filters\IpFilter as RhymixIpFilter;
 use Rhymix\Framework\Session;
 use Rhymix\Framework\Template;
+use Rhymix\Modules\Allbandazole\Models\Blacklist as BlacklistModel;
 use Rhymix\Modules\Allbandazole\Models\Config as ConfigModel;
 use Rhymix\Modules\Allbandazole\Models\IpFilter as IpFilterModel;
 use Context;
@@ -131,6 +132,37 @@ class EventHandlers extends Base
 				return $this->_block($config->block_clouds['method'] ?? 'simple');
 			}
 		}
+
+		// 휴리스틱 차단 대상인지 확인
+		if (isset($config->block_heuristic['enabled']) && $config->block_heuristic['enabled'])
+		{
+			// 0점부터 시작해서 의심스러운 요소가 발견될 때마다 점수를 올리는 방식...이지만 현재는 한 가지만 해당되어도 바로 차단하도록 되어 있음
+			$is_suspicious = 0;
+
+			// 리퍼러가 없거나 조작된 리퍼러인 경우
+			if (empty($_SERVER['HTTP_REFERER']) || preg_match('!^https?://' . preg_quote($_SERVER['HTTP_HOST'] ?? 'www.google.com', '!') . '$!', $_SERVER['HTTP_REFERER']))
+			{
+				$is_suspicious++;
+			}
+
+			// 신규 세션인 경우
+			if (isset($_SESSION['is_new_session']) && $_SESSION['is_new_session'])
+			{
+				$is_suspicious++;
+			}
+
+			// 많은 부하를 일으키는 서브페이지에 정상적인 경로를 거치지 않고 직접 접속한 경우
+			if ($is_suspicious >= 1)
+			{
+				foreach (BlacklistModel::GET_PARAMS as $param)
+				{
+					if (isset($_GET[$param]) && !empty($_GET[$param]))
+					{
+						return $this->_block($config->block_heuristic['method'] ?? 'simple');
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -151,6 +183,9 @@ class EventHandlers extends Base
 		{
 			case 'simple':
 				$this->_blockSimple();
+				break;
+			case 'redirect':
+				$this->_blockRedirect();
 				break;
 			case 'captcha':
 				$this->_blockCaptcha();
@@ -174,6 +209,40 @@ class EventHandlers extends Base
 		$type = ($_SERVER['SERVER_SOFTWARE'] ?? '') === 'nginx' ? 'nginx' : 'apache';
 		$template = $this->module_path . 'views/blocked/' . $type . '.html';
 		readfile($template);
+	}
+
+	/**
+	 * 리다이렉트 방식으로 차단
+	 *
+	 * @return void
+	 */
+	protected function _blockRedirect()
+	{
+		// 많은 부하를 일으키는 검색 조건을 제거한 URL로 리다이렉트하되, 실제 요청한 게시판과 문서는 가능한 유지하도록 함
+		$url_info = parse_url($_SERVER['REQUEST_URI'] ?? \RX_BASEURL);
+		if ($url_info['query'] ?? '')
+		{
+			parse_str($url_info['query'], $params);
+			foreach ($params as $key => $val)
+			{
+				if ($key !== 'document_srl' && $key !== 'mid')
+				{
+					unset($params[$key]);
+				}
+			}
+			if (count($params) > 0)
+			{
+				$url_info['query'] = http_build_query($params);
+			}
+			else
+			{
+				$url_info['query'] = '';
+			}
+		}
+
+		$location = ($url_info['path'] ?? \RX_BASEURL) . ($url_info['query'] ? ('?' . $url_info['query']) : '');
+		header('HTTP/1.1 301 Moved Permanently');
+		header('Location: ' . $location);
 	}
 
 	/**

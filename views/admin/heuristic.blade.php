@@ -38,6 +38,10 @@
 					{{ $lang->cmd_allbandazole_block_method_simple }}
 				</label>
 				<label class="x_inline">
+					<input type="radio" name="block_method" value="redirect" @checked($config->block_heuristic['method'] === 'redirect') />
+					{{ $lang->cmd_allbandazole_block_method_redirect }}
+				</label>
+				<label class="x_inline">
 					<input type="radio" name="block_method" value="captcha" @checked($config->block_heuristic['method'] === 'captcha') />
 					{{ $lang->cmd_allbandazole_block_method_captcha }}
 				</label>
