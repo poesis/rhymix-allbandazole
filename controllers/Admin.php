@@ -80,6 +80,19 @@ class Admin extends Base
 	}
 
 	/**
+	 * 휴리스틱 차단 설정
+	 */
+	public function dispAllbandazoleAdminHeuristic()
+	{
+		// 모듈 설정 로딩
+		$config = ConfigModel::getConfig();
+		Context::set('config', $config);
+
+		// 템플릿 파일 지정
+		$this->setTemplateFile('heuristic');
+	}
+
+	/**
 	 * 캡챠 설정
 	 */
 	public function dispAllbandazoleAdminCaptcha()
@@ -269,6 +282,49 @@ class Admin extends Base
 
 		// 캡챠 사용 가능 여부 확인
 		if ($config->block_clouds['method'] === 'captcha')
+		{
+			$spamfilter_config = ModuleModel::getModuleConfig('spamfilter') ?? new \stdClass();
+			if (!isset($spamfilter_config->captcha->type) || $spamfilter_config->captcha->type === 'none')
+			{
+				throw new Exception('msg_allbandazole_captcha_not_enabled');
+			}
+		}
+
+		// 변경된 설정을 저장
+		$output = ConfigModel::setConfig($config);
+		if (!$output->toBool())
+		{
+			return $output;
+		}
+
+		// 설정 화면으로 리다이렉트
+		$this->setMessage('success_registed');
+		$this->setRedirectUrl(Context::get('success_return_url'));
+	}
+
+	/**
+	 * 휴리스틱 차단 설정 저장
+	 */
+	public function procAllbandazoleAdminSaveHeuristic()
+	{
+		// 현재 설정 상태 불러오기
+		$config = ConfigModel::getConfig();
+
+		// 제출받은 데이터 불러오기
+		$vars = Context::getRequestVars();
+		$config->block_heuristic['enabled'] = false;
+		if ($vars->block_heuristic === 'Y')
+		{
+			$config->block_heuristic['enabled'] = true;
+		}
+		$config->block_heuristic['method'] = $vars->block_method;
+		if (!in_array($config->block_heuristic['method'], ['simple', 'captcha', 'login']))
+		{
+			$config->block_heuristic['method'] = 'simple';
+		}
+
+		// 캡챠 사용 가능 여부 확인
+		if ($config->block_heuristic['method'] === 'captcha')
 		{
 			$spamfilter_config = ModuleModel::getModuleConfig('spamfilter') ?? new \stdClass();
 			if (!isset($spamfilter_config->captcha->type) || $spamfilter_config->captcha->type === 'none')

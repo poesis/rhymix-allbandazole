@@ -6,11 +6,13 @@
 		<action name="dispAllbandazoleAdminConfig" class="Controllers\Admin" menu-name="allbandazole" admin-index="true" />
 		<action name="dispAllbandazoleAdminCountries" class="Controllers\Admin" menu-name="allbandazole" />
 		<action name="dispAllbandazoleAdminClouds" class="Controllers\Admin" menu-name="allbandazole" />
+		<action name="dispAllbandazoleAdminHeuristic" class="Controllers\Admin" menu-name="allbandazole" />
 		<action name="dispAllbandazoleAdminCaptcha" class="Controllers\Admin" menu-name="allbandazole" />
 		<action name="dispAllbandazoleAdminCustomize" class="Controllers\Admin" menu-name="allbandazole" />
 		<action name="procAllbandazoleAdminSaveConfig" class="Controllers\Admin" />
 		<action name="procAllbandazoleAdminSaveCountries" class="Controllers\Admin" />
 		<action name="procAllbandazoleAdminSaveClouds" class="Controllers\Admin" />
+		<action name="procAllbandazoleAdminSaveHeuristic" class="Controllers\Admin" />
 		<action name="procAllbandazoleAdminImportCountries" class="Controllers\Admin" />
 		<action name="procAllbandazoleAdminImportClouds" class="Controllers\Admin" />
 		<action name="procAllbandazoleAdminCustomize" class="Controllers\Admin" />

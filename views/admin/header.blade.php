@@ -15,6 +15,9 @@
 	<li @class(['x_active' => $act == 'dispAllbandazoleAdminClouds'])>
 		<a href="@url(['module' => 'admin', 'act' => 'dispAllbandazoleAdminClouds'])">{$lang->cmd_allbandazole_clouds}</a>
 	</li>
+	<li @class(['x_active' => $act == 'dispAllbandazoleAdminHeuristic'])>
+		<a href="@url(['module' => 'admin', 'act' => 'dispAllbandazoleAdminHeuristic'])">{$lang->cmd_allbandazole_heuristic}</a>
+	</li>
 	<li @class(['x_active' => $act == 'dispAllbandazoleAdminCaptcha'])>
 		<a href="@url(['module' => 'admin', 'act' => 'dispAllbandazoleAdminCaptcha'])">{$lang->cmd_allbandazole_captcha}</a>
 	</li>
