@@ -8,6 +8,23 @@ namespace Rhymix\Modules\Allbandazole\Models;
 class IpFilter
 {
 	/**
+	 * IP 국가 확인
+	 *
+	 * @param string $ip
+	 * @return string
+	 */
+	public static function getCountry(string $ip): string
+	{
+		$ip2long = ip2long($ip);
+		$output = executeQuery('allbandazole.getCountryByIP', ['ip' => $ip2long]);
+		if (isset($output->data) && isset($output->data->country) && $output->data->start_ip <= $ip2long)
+		{
+			return $output->data->country;
+		}
+		return 'XX';
+	}
+
+	/**
 	 * 국가 차단 대상인지 확인
 	 *
 	 * @param string $ip
