@@ -27,7 +27,6 @@ class Blacklist
 		'Bytedance',
 		'Bytespider',
 		'CCBot',
-		'ChatGPT-User',
 		'Claude-Web',
 		'ClaudeBot',
 		'cohere-ai',

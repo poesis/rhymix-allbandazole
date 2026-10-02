@@ -136,7 +136,6 @@ class Admin extends Base
 		$config->user_agents = array_filter(array_map('trim', explode("\n", trim($vars->user_agents))), function($str) {
 			return $str !== '';
 		});
-		$config->user_agents_regexp = ConfigModel::generateRegexp($config->user_agents);
 		$config->ip_blocks = array_filter(array_map('trim', explode("\n", trim($vars->ip_blocks))), function($str) {
 			return $str !== '';
 		});
@@ -146,14 +145,34 @@ class Admin extends Base
 		$config->ip_whitelist = array_filter(array_map('trim', explode("\n", trim($vars->ip_whitelist))), function($str) {
 			return $str !== '';
 		});
+
+		// 로봇 허용 규칙
 		$config->bot_whitelist = [];
-		foreach (['googlebot', 'bingbot', 'facebook', 'twitter', 'kakaotalk', 'baidu', 'yandex', 'duckduckgo'] as $bot)
+		foreach (['googlebot', 'bingbot', 'baidu', 'yandex', 'duckduckgo', 'facebook', 'twitter', 'kakaotalk', 'chatgpt', 'claude'] as $bot)
 		{
 			if (is_array($vars->bot_whitelist ?? null) && in_array($bot, $vars->bot_whitelist))
 			{
 				$config->bot_whitelist[$bot] = true;
 			}
 		}
+
+		// AI 봇 허용 규칙에 따라 User-Agent 목록을 업데이트
+		if (isset($config->bot_whitelist['chatgpt']))
+		{
+			$config->user_agents = array_filter($config->user_agents, function($str) {
+				return $str !== 'OAI-SearchBot' && $str !== 'ChatGPT-User';
+			});
+		}
+		if (isset($config->bot_whitelist['claude']))
+		{
+			$config->user_agents = array_filter($config->user_agents, function($str) {
+				return $str !== 'Claude-SearchBot' && $str !== 'Claude-User';
+			});
+		}
+		$config->user_agents = array_values(array_unique($config->user_agents));
+		$config->user_agents_regexp = ConfigModel::generateRegexp($config->user_agents);
+
+		// 캡챠 인증 유지 시간
 		$config->captcha_pass_time = max(1, (int)$vars->captcha_pass_time);
 
 		// 현재 접속자가 차단될 수 있는지 확인

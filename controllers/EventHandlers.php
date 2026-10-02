@@ -60,6 +60,18 @@ class EventHandlers extends Base
 		{
 			return;
 		}
+		if (isset($config->bot_whitelist['baidu']) && preg_match('/Baiduspider\//', $user_agent))
+		{
+			return;
+		}
+		if (isset($config->bot_whitelist['yandex']) && preg_match('/YandexBot\//', $user_agent))
+		{
+			return;
+		}
+		if (isset($config->bot_whitelist['duckduckgo']) && preg_match('/DuckDuckBot\//', $user_agent))
+		{
+			return;
+		}
 		if (isset($config->bot_whitelist['facebook']) && preg_match('/facebookexternalhit\//', $user_agent))
 		{
 			return;
@@ -72,15 +84,11 @@ class EventHandlers extends Base
 		{
 			return;
 		}
-		if (isset($config->bot_whitelist['baidu']) && preg_match('/Baiduspider\//', $user_agent))
+		if (isset($config->bot_whitelist['chatgpt']) && preg_match('/OAI-SearchBot|ChatGPT-User/', $user_agent))
 		{
 			return;
 		}
-		if (isset($config->bot_whitelist['yandex']) && preg_match('/YandexBot\//', $user_agent))
-		{
-			return;
-		}
-		if (isset($config->bot_whitelist['duckduckgo']) && preg_match('/DuckDuckBot\//', $user_agent))
+		if (isset($config->bot_whitelist['claude']) && preg_match('/Claude-SearchBot|Claude-User/', $user_agent))
 		{
 			return;
 		}
